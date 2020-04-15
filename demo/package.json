@@ -1,0 +1,21 @@
+{
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "develop": "sapper dev",
+    "build": "sapper export --basepath svelte-typeahead",
+    "deploy": "node gh-pages"
+  },
+  "dependencies": {
+    "polka": "next",
+    "sirv": "^0.4.0"
+  },
+  "devDependencies": {
+    "@metonym/sapper": "^0.27.12",
+    "gh-pages": "^2.2.0",
+    "svelte": "^3.0.0",
+    "svelte-loader": "^2.9.0",
+    "webpack": "^4.7.0",
+    "svelte-typeahead": "../"
+  }
+}
