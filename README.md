@@ -48,7 +48,7 @@ Use a slot to render custom results.
 | value            | `string` (default: `""`)         |
 | data             | `T[]` (default: `[]`)            |
 | extract          | `(T) => T`                       |
-| autoselect       | `boolean` (default: `boolean`)   |
+| autoselect       | `boolean` (default: `true`)      |
 | `...$$restProps` | (forwarded to `Search` component |
 
 ## Forwarded events
