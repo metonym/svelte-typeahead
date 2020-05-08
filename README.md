@@ -49,7 +49,7 @@ Use a slot to render custom results.
 | data             | `T[]` (default: `[]`)            |
 | extract          | `(T) => T`                       |
 | autoselect       | `boolean` (default: `true`)      |
-| `...$$restProps` | (forwarded to `Search` component |
+| `...$$restProps` | (forwarded to `Search` component)|
 
 ## Forwarded events
 
