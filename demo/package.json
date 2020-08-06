@@ -3,8 +3,7 @@
   "private": true,
   "scripts": {
     "develop": "sapper dev",
-    "build": "sapper export --basepath svelte-typeahead",
-    "deploy": "node gh-pages"
+    "build": "sapper export --basepath svelte-typeahead"
   },
   "dependencies": {
     "polka": "next",
@@ -12,10 +11,9 @@
   },
   "devDependencies": {
     "@metonym/sapper": "^0.27.12",
-    "gh-pages": "^2.2.0",
-    "svelte": "^3.0.0",
+    "svelte": "^3.24.1",
     "svelte-loader": "^2.9.0",
-    "webpack": "^4.7.0",
-    "svelte-typeahead": "../"
+    "svelte-typeahead": "../",
+    "webpack": "^4.44.1"
   }
 }

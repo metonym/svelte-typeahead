@@ -3,16 +3,12 @@
   import { states } from "../data/us_states";
 </script>
 
-<svelte:head>
-  <title>svelte-typeahead</title>
-</svelte:head>
-
 <Typeahead
-  placeholder="Search U.S. states..."
+  placeholder={`Search U.S. states (e.g. "California")`}
   autofocus
   hideLabel
   data={states}
-  extract={item => item.state}
+  extract={(item) => item.state}
   on:select={({ detail }) => {
     console.log('select', detail);
   }} />
