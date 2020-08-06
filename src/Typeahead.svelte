@@ -5,7 +5,7 @@
   export let autoselect = true;
   export let extract = (item) => item;
 
-  import { filter } from "fuzzy";
+  import fuzzy from "fuzzy";
   import Search from "svelte-search";
   import { tick, createEventDispatcher, afterUpdate } from "svelte";
 
@@ -34,7 +34,9 @@
   }
 
   $: options = { pre: "<mark>", post: "</mark>", extract };
-  $: results = filter(value, data, options).filter(({ score }) => score > 0);
+  $: results = fuzzy
+    .filter(value, data, options)
+    .filter(({ score }) => score > 0);
   $: resultsId = results.map((result) => extract(result.original)).join("");
 </script>
 

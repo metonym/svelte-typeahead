@@ -13,10 +13,6 @@ export default ["es", "umd"].map((format) => {
       file: UMD ? pkg.main : pkg.module,
       name: UMD ? pkg.name : undefined,
     },
-    plugins: [
-      svelte(),
-      resolve(),
-      commonjs({ namedExports: { fuzzy: ["filter"] } }),
-    ],
+    plugins: [svelte(), resolve(), commonjs()],
   };
 });
