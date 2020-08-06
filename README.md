@@ -7,6 +7,8 @@
 
 This component uses the lightweight [fuzzy](https://github.com/mattyork/fuzzy) library for typeahead and follows [WAI-ARIA guidelines](https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.1pattern/listbox-combo.html).
 
+## [Demo](https://metonym.github.io/svelte-typeahead/)
+
 ## Install
 
 ```bash
@@ -35,7 +37,7 @@ By default, this component uses the `fuzzy` library to higlight matching charact
 
 Use a slot to render custom results.
 
-```html
+```jsx
 <Typeahead {data} extract={item => item.state} let={result}>
   <div>{@html result.string}</div>
 </Typeahead>
@@ -43,13 +45,13 @@ Use a slot to render custom results.
 
 ## API
 
-| Property name    | Value                            |
-| ---------------- | -------------------------------- |
-| value            | `string` (default: `""`)         |
-| data             | `T[]` (default: `[]`)            |
-| extract          | `(T) => T`                       |
-| autoselect       | `boolean` (default: `true`)      |
-| `...$$restProps` | (forwarded to `Search` component)|
+| Prop name        | Value                             |
+| :--------------- | :-------------------------------- |
+| value            | `string` (default: `""`)          |
+| data             | `T[]` (default: `[]`)             |
+| extract          | `(T) => T`                        |
+| autoselect       | `boolean` (default: `true`)       |
+| `...$$restProps` | (forwarded to `Search` component) |
 
 ## Forwarded events
 
