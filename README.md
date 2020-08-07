@@ -3,7 +3,7 @@
 [![NPM][npm]][npm-url]
 [![Build][build]][build-badge]
 
-> Accessible search typeahead component.
+> Accessible, fuzzy search typeahead component.
 
 This component uses the lightweight [fuzzy](https://github.com/mattyork/fuzzy) library for typeahead and follows [WAI-ARIA guidelines](https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.1pattern/listbox-combo.html).
 

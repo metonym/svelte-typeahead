@@ -2,7 +2,7 @@
   "name": "svelte-typeahead",
   "version": "0.1.1",
   "license": "MIT",
-  "description": "Accessible search typeahead component",
+  "description": "Accessible, fuzzy search typeahead component",
   "author": "Eric Liu (https://github.com/metonym)",
   "svelte": "./src/index.js",
   "main": "./lib/index.js",
