@@ -40,7 +40,7 @@ By default, this component uses the `fuzzy` library to higlight matching charact
 Use a slot to render custom results.
 
 ```jsx
-<Typeahead {data} extract={item => item.state} let={result}>
+<Typeahead {data} extract={item => item.state} let:result>
   <div>{@html result.string}</div>
 </Typeahead>
 ```
