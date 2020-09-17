@@ -1,9 +1,32 @@
 <script>
+  /**
+   * @type {string} [id=string]
+   */
   export let id = "typeahead-" + Math.random().toString(36);
+
+  /**
+   * @type {string} [value=""]
+   */
   export let value = "";
+
+  /**
+   * @typedef {{[index: string]: any}} Item
+   */
+
+  /**
+   * @type {Item[]} [data=[]]
+   */
   export let data = [];
-  export let autoselect = true;
+
+  /**
+   * @type {(item: Item) => Item} [extract = (item: Item) => Item]
+   */
   export let extract = (item) => item;
+
+  /**
+   * @type {boolean} [autoselect=true]
+   */
+  export let autoselect = true;
 
   import fuzzy from "fuzzy";
   import Search from "svelte-search";
@@ -104,42 +127,42 @@
 </style>
 
 <svelte:window
-  on:click={({ target }) => {
+  on:click="{({ target }) => {
     if (!hideDropdown && results.length > 0 && comboboxRef && !comboboxRef.contains(target)) {
       hideDropdown = true;
     }
-  }} />
+  }}" />
 
 <div
-  bind:this={comboboxRef}
+  bind:this="{comboboxRef}"
   role="combobox"
   aria-haspopup="listbox"
   aria-owns="{id}-listbox"
   class="svelte-typeahead"
-  class:dropdown={results.length > 0}
-  aria-expanded={!hideDropdown && results.length > 0}
-  {id}>
+  class:dropdown="{results.length > 0}"
+  aria-expanded="{!hideDropdown && results.length > 0}"
+  id="{id}">
   <Search
     {...$$restProps}
-    bind:this={searchRef}
+    bind:this="{searchRef}"
     aria-autocomplete="list"
     aria-controls="{id}-listbox"
     aria-labelledby="{id}-label"
     aria-activedescendant=""
-    {id}
+    id="{id}"
     bind:value
     on:input
     on:change
     on:focus
-    on:focus={() => {
+    on:focus="{() => {
       hideDropdown = false;
-    }}
-    on:clear={() => {
+    }}"
+    on:clear="{() => {
       hideDropdown = false;
-    }}
+    }}"
     on:blur
     on:keydown
-    on:keydown={({ key }) => {
+    on:keydown="{({ key }) => {
       switch (key) {
         case 'Enter':
           select();
@@ -162,7 +185,7 @@
           hideDropdown = true;
           break;
       }
-    }} />
+    }}" />
   {#if !hideDropdown && results.length > 0}
     <ul
       class="svelte-typeahead-list"
@@ -173,13 +196,13 @@
         <li
           role="option"
           id="{id}-result"
-          class:selected={selectedIndex === i}
-          aria-selected={selectedIndex === i}
-          on:click={() => {
+          class:selected="{selectedIndex === i}"
+          aria-selected="{selectedIndex === i}"
+          on:click="{() => {
             selectedIndex = i;
             select();
-          }}>
-          <slot {result}>
+          }}">
+          <slot result="{result}">
             {@html result.string}
           </slot>
         </li>
