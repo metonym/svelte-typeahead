@@ -1,5 +1,6 @@
 # svelte-typeahead
 
+
 <script>
   import Typeahead from "svelte-typeahead";
   import { states } from "./data";
