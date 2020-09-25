@@ -1,3 +1,1 @@
-import Typeahead from "./Typeahead.svelte";
-
-export default Typeahead;
+export { default } from "./Typeahead.svelte";

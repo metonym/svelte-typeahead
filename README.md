@@ -13,8 +13,10 @@ Try it in the [Svelte REPL](https://svelte.dev/repl/a1b828d80de24f7e995b2365782c
 
 ## Install
 
-```bash
+```sh
 yarn add -D svelte-typeahead
+# OR
+npm -i -D svelte-typeahead
 ```
 
 ## Usage
@@ -35,7 +37,7 @@ yarn add -D svelte-typeahead
 
 ### Custom results
 
-By default, this component uses the `fuzzy` library to higlight matching characters with the `mark` element.
+By default, this component uses the `fuzzy` library to highlight matching characters with the `mark` element.
 
 Use a slot to render custom results.
 
@@ -73,6 +75,20 @@ The following events are forwarded to the underlying Search input element:
 - on:clear
 - on:blur
 - on:keydown
+
+## Usage with `svite`
+
+To use the component with [svite](https://github.com/dominikg/svite), include "fuzzy" in `optimizeDeps`:
+
+```js
+// vite.config.js
+
+module.exports = {
+  optimizeDeps: {
+    include: ["fuzzy"],
+  },
+};
+```
 
 ## [Changelog](CHANGELOG.md)
 
