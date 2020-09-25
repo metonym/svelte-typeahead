@@ -1,6 +1,5 @@
 # svelte-typeahead
 
-
 <script>
   import Typeahead from "svelte-typeahead";
   import { states } from "./data";
@@ -13,7 +12,7 @@
   data="{states}"
   extract="{(item) => item.state}"
   on:select="{({ detail }) => {
-    console.log('select', detail);
+  console.log('select', detail);
   }}"
   />
 

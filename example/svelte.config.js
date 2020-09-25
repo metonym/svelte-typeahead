@@ -1,6 +1,6 @@
 const { mdsvex } = require("mdsvex");
 
 module.exports = {
-  extensions: [".svelte", ".svx"],
-  preprocess: [mdsvex()],
+  extensions: [".svelte", ".md"],
+  preprocess: [mdsvex({ extension: "md" })],
 };
