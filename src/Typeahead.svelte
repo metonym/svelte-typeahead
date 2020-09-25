@@ -131,7 +131,8 @@
     if (!hideDropdown && results.length > 0 && comboboxRef && !comboboxRef.contains(target)) {
       hideDropdown = true;
     }
-  }}" />
+  }}"
+/>
 
 <div
   bind:this="{comboboxRef}"
@@ -141,7 +142,8 @@
   class="svelte-typeahead"
   class:dropdown="{results.length > 0}"
   aria-expanded="{!hideDropdown && results.length > 0}"
-  id="{id}">
+  id="{id}"
+>
   <Search
     {...$$restProps}
     bind:this="{searchRef}"
@@ -185,13 +187,15 @@
           hideDropdown = true;
           break;
       }
-    }}" />
+    }}"
+  />
   {#if !hideDropdown && results.length > 0}
     <ul
       class="svelte-typeahead-list"
       role="listbox"
       aria-labelledby=""
-      id="{id}-listbox">
+      id="{id}-listbox"
+    >
       {#each results as result, i}
         <li
           role="option"
@@ -201,7 +205,8 @@
           on:click="{() => {
             selectedIndex = i;
             select();
-          }}">
+          }}"
+        >
           <slot result="{result}">
             {@html result.string}
           </slot>

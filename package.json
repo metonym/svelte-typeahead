@@ -42,5 +42,9 @@
   "files": [
     "lib",
     "src"
-  ]
+  ],
+  "prettier": {
+    "svelteStrictMode": true,
+    "svelteBracketNewLine": true
+  }
 }
