@@ -1,4 +1,27 @@
-export const states = [
+# svelte-typeahead
+
+<script>
+  import Typeahead from "svelte-typeahead";
+  import { states } from "./data";
+</script>
+
+<Typeahead
+placeholder="{`Search U.S. states (e.g. "California")`}"
+autofocus
+hideLabel
+data="{states}"
+on:select="{({ detail }) => {
+console.log('select', detail);
+}}"
+/>
+
+[Example source code](https://github.com/metonym/svelte-typeahead/tree/master/example)
+
+```svelte
+<script>
+  import Typeahead from "svelte-typeahead";
+
+  const states = [
   "Alabama",
   "Alaska",
   "Arizona",
@@ -47,3 +70,15 @@ export const states = [
   "Virginia",
   "Washington",
 ];
+</script>
+
+<Typeahead
+  placeholder="{`Search U.S. states (e.g. "California")`}"
+  autofocus
+  hideLabel
+  data="{states}"
+  on:select="{({ detail }) => {
+    console.log('select', detail);
+  }}"
+  />
+```

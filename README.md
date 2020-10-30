@@ -21,7 +21,7 @@ npm i -D svelte-typeahead
 
 ## Usage
 
-```html
+```svelte
 <script>
   import Typeahead from "svelte-typeahead";
 
