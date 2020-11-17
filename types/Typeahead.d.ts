@@ -2,7 +2,7 @@
 
 type Item = any;
 
-export interface TypeaheadProps {
+export interface TypeaheadProps extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["input"]> {
   /**
    * @default "typeahead-" + Math.random().toString(36)
    */
@@ -27,12 +27,56 @@ export interface TypeaheadProps {
    * @default true
    */
   autoselect?: boolean;
+
+  /** `svelte-search` props */
+
+  /**
+   * @default "Search"
+   */
+  label?: string;
+
+  /**
+   * @default false
+   */
+  hideLabel?: boolean;
+
+  /**
+   * @default "search"
+   */
+  name?: string;
+
+  /**
+   * @default ""
+   */
+  value?: string;
+
+  /**
+   * @default false
+   */
+  debounce?: boolean;
+
+  /**
+   * @default 250
+   */
+  debounceValue?: number;
+
+  /**
+   * @default () => { value = ""; }
+   */
+  clear?: () => any;
+
+  /**
+   * @default () => { input.focus(); }
+   */
+  focus?: () => any;
 }
 
 export default class Typeahead {
   $$prop_def: TypeaheadProps;
   $$slot_def: {
-    default: { result: { index: number; original: Item; score: number; string: string } };
+    default: {
+      result: { index: number; original: Item; score: number; string: string };
+    };
   };
 
   $on(eventname: "select", cb: (event: CustomEvent<{ selectedIndex: number; selected: Item }>) => void): () => void;

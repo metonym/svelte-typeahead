@@ -36,6 +36,11 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
+"@tsconfig/svelte@^1.0.10":
+  version "1.0.10"
+  resolved "https://registry.npmjs.org/@tsconfig/svelte/-/svelte-1.0.10.tgz#30ec7feeee0bdf38b12a50f0686f8a2e7b6b9dc0"
+  integrity sha512-EBrpH2iXXfaf/9z81koiDYkp2mlwW2XzFcAqn6qh7VKyP8zBvHHAQzNhY+W9vH5arAjmGAm5g8ElWq6YmXm3ig==
+
 "@types/estree@*":
   version "0.0.45"
   resolved "https://registry.npmjs.org/@types/estree/-/estree-0.0.45.tgz#e9387572998e5ecdac221950dab3e8c3b16af884"
@@ -206,10 +211,10 @@ resolve@^1.17.0:
   dependencies:
     path-parse "^1.0.6"
 
-rollup-plugin-svelte@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.npmjs.org/rollup-plugin-svelte/-/rollup-plugin-svelte-6.1.0.tgz#bba94a37796fac1f73528161e84cc4976df431e1"
-  integrity sha512-TX1nIZSD6ePiSdYIEfpkvR7lLnP1nsSycCVz+vXbm5d5kIe5WMldo6fwcL/T8KPjc42XDgLaRcS74BorpQvpiA==
+rollup-plugin-svelte@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.npmjs.org/rollup-plugin-svelte/-/rollup-plugin-svelte-6.1.1.tgz#66362cf0500fb7a848283ebcf19d289a60ef0871"
+  integrity sha512-ijnm0pH1ScrY4uxwaNXBpNVejVzpL2769hIEbAlnqNUWZrffLspu5/k9/l/Wsj3NrEHLQ6wCKGagVJonyfN7ow==
   dependencies:
     require-relative "^0.8.7"
     rollup-pluginutils "^2.8.2"
@@ -222,10 +227,10 @@ rollup-pluginutils@^2.8.2:
   dependencies:
     estree-walker "^0.6.1"
 
-rollup@^2.32.1:
-  version "2.32.1"
-  resolved "https://registry.npmjs.org/rollup/-/rollup-2.32.1.tgz#625a92c54f5b4d28ada12d618641491d4dbb548c"
-  integrity sha512-Op2vWTpvK7t6/Qnm1TTh7VjEZZkN8RWgf0DHbkKzQBwNf748YhXbozHVefqpPp/Fuyk/PQPAnYsBxAEtlMvpUw==
+rollup@^2.33.2:
+  version "2.33.2"
+  resolved "https://registry.npmjs.org/rollup/-/rollup-2.33.2.tgz#c4c76cd405a7605e6ebe90976398c46d4c2ea166"
+  integrity sha512-QPQ6/fWCrzHtSXkI269rhKaC7qXGghYBwXU04b1JsDZ6ibZa3DJ9D1SFAYRMgx1inDg0DaTbb3N4Z1NK/r3fhw==
   optionalDependencies:
     fsevents "~2.1.2"
 
@@ -234,15 +239,20 @@ sourcemap-codec@^1.4.4, sourcemap-codec@^1.4.8:
   resolved "https://registry.yarnpkg.com/sourcemap-codec/-/sourcemap-codec-1.4.8.tgz#ea804bd94857402e6992d05a38ef1ae35a9ab4c4"
   integrity sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==
 
-svelte-search@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/svelte-search/-/svelte-search-0.1.1.tgz#2f3f672e0db01e923c2200d8697bed2eb2e5c704"
-  integrity sha512-Tuk74xHq2XQuHrV+cdKn4WqM98inlrM6zNqnmcMbxNspIWrX8aF4j60rOw02EmgrxIIaX0AdKaKZ5BiVcQ+yGA==
+svelte-search@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.npmjs.org/svelte-search/-/svelte-search-0.2.0.tgz#61822a37bdbad879227c7b357793bb64707d1378"
+  integrity sha512-uvCrtZWeuFQ4SUwaZcXwSv/Jw6SJDd3L/03iEdTtQvHzO4bJPtEjXUnZc4pQoEpoCHK2ZNFq8csLqoqoyLd1Dg==
 
-svelte@^3.29.4:
-  version "3.29.4"
-  resolved "https://registry.npmjs.org/svelte/-/svelte-3.29.4.tgz#d0f80cb58109ef52963855c23496f7153bb2eb7e"
-  integrity sha512-oW0fGHlyFFMvzRtIvOs84b0fOc0gmZNQcL5Is3hxuTpvaYX3pfd8oHy4KnOvbq4Ca6SG6AHdRMk7OhApTo0NqA==
+svelte@^3.29.7:
+  version "3.29.7"
+  resolved "https://registry.npmjs.org/svelte/-/svelte-3.29.7.tgz#e254eb2d0d609ce0fd60f052d444ac4a66d90f7d"
+  integrity sha512-rx0g311kBODvEWUU01DFBUl3MJuJven04bvTVFUG/w0On/wuj0PajQY/QlXcJndFxG+W1s8iXKaB418tdHWc3A==
+
+typescript@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.npmjs.org/typescript/-/typescript-4.0.5.tgz#ae9dddfd1069f1cb5beb3ef3b2170dd7c1332389"
+  integrity sha512-ywmr/VrTVCmNTJ6iV2LwIrfG1P+lv6luD8sUJs+2eI9NLGigaN+nUQc13iHqisq7bra9lnmUSYqbJvegraBOPQ==
 
 wrappy@1:
   version "1.0.2"
