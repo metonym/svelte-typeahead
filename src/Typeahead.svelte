@@ -1,31 +1,18 @@
 <script>
   /**
-   * @type {string} [id=string]
+   * @typedef {any} Item
+   * @event {{ selectedIndex: number; selected: Item; }} select
+   * @slot {{ result: { index: number; original: Item; score: number; string: string; } }}
    */
-  export let id = "typeahead-" + Math.random().toString(36);
 
-  /**
-   * @type {string} [value=""]
-   */
+  export let id = "typeahead-" + Math.random().toString(36);
   export let value = "";
 
-  /**
-   * @typedef {{[index: string]: any}} Item
-   */
-
-  /**
-   * @type {Item[]} [data=[]]
-   */
+  /** @type {Item[]} */
   export let data = [];
 
-  /**
-   * @type {(item: Item) => Item} [extract = (item: Item) => Item]
-   */
+  /** @type {(item: Item) => Item} */
   export let extract = (item) => item;
-
-  /**
-   * @type {boolean} [autoselect=true]
-   */
   export let autoselect = true;
 
   import fuzzy from "fuzzy";
