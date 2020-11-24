@@ -19,16 +19,23 @@ npm i -D svelte-typeahead
 
 ## Usage
 
+Pass an array of objects to the `data` prop. Use the `extractor` to specify the key value to search on.
+
 ```svelte
 <script>
   import Typeahead from "svelte-typeahead";
 
   const data = [
-    { state: "California" },
-    { state: "North Carolina" },
-    { state: "North Dakota" },
-    { state: "South Carolina" },
-    { state: "South Dakota" },
+    { id: 0, state: "California" },
+    { id: 1, state: "North Carolina" },
+    { id: 2, state: "North Dakota" },
+    { id: 3, state: "South Carolina" },
+    { id: 4, state: "South Dakota" },
+    { id: 5, state: "Michigan" },
+    { id: 6, state: "Tennessee" },
+    { id: 7, state: "Nevada" },
+    { id: 8, state: "New Hampshire" },
+    { id: 9, state: "New Jersey" },
   ];
 </script>
 
