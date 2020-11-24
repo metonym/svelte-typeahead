@@ -1,6 +1,7 @@
 .DS_Store
 *.tgz
 /lib
+/public
 /node_modules
 yarn-debug.log*
 yarn-error.log*

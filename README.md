@@ -9,11 +9,9 @@ This component uses the lightweight [fuzzy](https://github.com/mattyork/fuzzy) l
 
 Try it in the [Svelte REPL](https://svelte.dev/repl/a1b828d80de24f7e995b2365782c8d04?version=3.24.1).
 
-## [Demo](https://metonym.github.io/svelte-typeahead/)
-
 ## Install
 
-```sh
+```bash
 yarn add -D svelte-typeahead
 # OR
 npm i -D svelte-typeahead
@@ -21,18 +19,27 @@ npm i -D svelte-typeahead
 
 ## Usage
 
+Pass an array of objects to the `data` prop. Use the `extractor` to specify the key value to search on.
+
 ```svelte
 <script>
   import Typeahead from "svelte-typeahead";
 
   const data = [
-    { state: "California" },
-    { state: "North Carolina" },
-    { state: "South Carolina" },
+    { id: 0, state: "California" },
+    { id: 1, state: "North Carolina" },
+    { id: 2, state: "North Dakota" },
+    { id: 3, state: "South Carolina" },
+    { id: 4, state: "South Dakota" },
+    { id: 5, state: "Michigan" },
+    { id: 6, state: "Tennessee" },
+    { id: 7, state: "Nevada" },
+    { id: 8, state: "New Hampshire" },
+    { id: 9, state: "New Jersey" },
   ];
 </script>
 
-<Typeahead {data} extract={item => item.state} />
+<Typeahead {data} extract={item => item.state} placeholder="Search..." />
 ```
 
 ### Custom results
@@ -41,10 +48,17 @@ By default, this component uses the `fuzzy` library to highlight matching charac
 
 Use a slot to render custom results.
 
-```jsx
-<Typeahead {data} extract={item => item.state} let:result>
-  <div>{@html result.string}</div>
+```svelte
+<Typeahead
+  {data}
+  placeholder="Search..."
+  extract={(item) => item.state}
+  let:result>
+  <div style="color: red">
+    {@html result.string}
+  </div>
 </Typeahead>
+
 ```
 
 ## API
@@ -57,17 +71,30 @@ Use a slot to render custom results.
 | autoselect       | `boolean` (default: `true`)       |
 | `...$$restProps` | (forwarded to `Search` component) |
 
+## Dispatched events
+
+```svelte
+<script>
+  let events = [];
+</script>
+
+<Typeahead
+  data="{data}"
+  placeholder="Search..."
+  extract="{(item) => item.state}"
+  on:select="{(e) => {
+    events = [...events, JSON.stringify(e.detail, null, 2)];
+  }}"
+/>
+
+<ul>
+  {#each events as event}
+    <li>{event}</li>
+  {/each}
+</ul>
+```
+
 ## Forwarded events
-
-### `Typeahead`
-
-| Event name  | Description                               |
-| :---------- | :---------------------------------------- |
-| `on:select` | triggered based on the dropdown selection |
-
-### `Search`
-
-The following events are forwarded to the underlying Search input element:
 
 - on:input
 - on:change
@@ -78,11 +105,10 @@ The following events are forwarded to the underlying Search input element:
 
 ## Usage with `svite`
 
-To use the component with [svite](https://github.com/dominikg/svite), include "fuzzy" in `optimizeDeps`:
+To use the component with [svite](https://github.com/dominikg/svite), add the following to `vite.config.js`:
 
 ```js
 // vite.config.js
-
 module.exports = {
   optimizeDeps: {
     include: ["fuzzy"],
@@ -96,7 +122,7 @@ module.exports = {
 
 [MIT](LICENSE)
 
-[npm]: https://img.shields.io/npm/v/svelte-typeahead.svg?color=blue
+[npm]: https://img.shields.io/npm/v/svelte-typeahead.svg?color=%23ff3e00
 [npm-url]: https://npmjs.com/package/svelte-typeahead
 [build]: https://travis-ci.com/metonym/svelte-typeahead.svg?branch=master
 [build-badge]: https://travis-ci.com/metonym/svelte-typeahead
