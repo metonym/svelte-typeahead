@@ -131,7 +131,7 @@ Svelte version 3.30 or greater is required if using TypeScript.
 
 [MIT](LICENSE)
 
-[npm]: https://img.shields.io/npm/v/svelte-typeahead.svg?color=%23ff3e00
+[npm]: https://img.shields.io/npm/v/svelte-typeahead.svg?color=%23ff3e00&style=for-the-badge
 [npm-url]: https://npmjs.com/package/svelte-typeahead
-[build]: https://travis-ci.com/metonym/svelte-typeahead.svg?branch=master
+[build]: https://img.shields.io/travis/com/metonym/svelte-typeahead?style=for-the-badge
 [build-badge]: https://travis-ci.com/metonym/svelte-typeahead
