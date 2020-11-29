@@ -37,9 +37,12 @@ Pass an array of objects to the `data` prop. Use the `extractor` to specify the 
     { id: 8, state: "New Hampshire" },
     { id: 9, state: "New Jersey" },
   ];
+
+  const extract = (item) => item.state;
 </script>
 
-<Typeahead {data} extract={item => item.state} placeholder="Search..." />
+<Typeahead {data} {extract} />
+
 ```
 
 ### Custom results
@@ -49,13 +52,9 @@ By default, this component uses the `fuzzy` library to highlight matching charac
 Use a slot to render custom results.
 
 ```svelte
-<Typeahead
-  {data}
-  placeholder="Search..."
-  extract={(item) => item.state}
-  let:result>
-  <div style="color: red">
-    {@html result.string}
+<Typeahead {data} {extract} let:result let:index>
+  <div style="color: red; font-weight: bold;">
+    {@html result.string} {index}
   </div>
 </Typeahead>
 
@@ -76,14 +75,20 @@ Use a slot to render custom results.
 ```svelte
 <script>
   let events = [];
+
+  function update(event, detail) {
+    events = [...events, JSON.stringify({ event, detail }, null, 2 )];
+  }
 </script>
 
 <Typeahead
-  data="{data}"
-  placeholder="Search..."
-  extract="{(item) => item.state}"
+  {data}
+  {extract}
   on:select="{(e) => {
-    events = [...events, JSON.stringify(e.detail, null, 2)];
+    update('select', e.detail);
+  }}"
+  on:clear="{() => {
+    update('clear');
   }}"
 />
 
@@ -115,6 +120,10 @@ module.exports = {
   },
 };
 ```
+
+## TypeScript support
+
+Svelte version 3.30 or greater is required if using TypeScript.
 
 ## [Changelog](CHANGELOG.md)
 

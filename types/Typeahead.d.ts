@@ -1,8 +1,17 @@
 /// <reference types="svelte" />
+import { SvelteComponent } from "svelte";
+import { SearchProps } from "svelte-search/types/Search";
 
-type Item = any;
+export type Item = string | number | Record<string, any>;
 
-export interface TypeaheadProps extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["input"]> {
+export interface FuzzyResult {
+  original: Item;
+  index: number;
+  score: number;
+  string: string;
+}
+
+export interface TypeaheadProps extends SearchProps {
   /**
    * @default "typeahead-" + Math.random().toString(36)
    */
@@ -24,66 +33,33 @@ export interface TypeaheadProps extends svelte.JSX.HTMLAttributes<HTMLElementTag
   extract?: (item: Item) => Item;
 
   /**
+   * Set to `false` to prevent the first result from being selected
    * @default true
    */
   autoselect?: boolean;
 
-  /** `svelte-search` props */
-
   /**
-   * @default "Search"
+   * @default []
    */
-  label?: string;
+  results?: FuzzyResult[];
 
   /**
+   * Set to `true` to re-focus the input after selecting a result
    * @default false
    */
-  hideLabel?: boolean;
-
-  /**
-   * @default "search"
-   */
-  name?: string;
-
-  /**
-   * @default ""
-   */
-  value?: string;
-
-  /**
-   * @default false
-   */
-  debounce?: boolean;
-
-  /**
-   * @default 250
-   */
-  debounceValue?: number;
-
-  /**
-   * @default () => { value = ""; }
-   */
-  clear?: () => any;
-
-  /**
-   * @default () => { input.focus(); }
-   */
-  focus?: () => any;
+  focusAfterSelect?: boolean;
 }
 
-export default class Typeahead {
-  $$prop_def: TypeaheadProps;
-  $$slot_def: {
-    default: {
-      result: { index: number; original: Item; score: number; string: string };
-    };
-  };
-
-  $on(eventname: "select", cb: (event: CustomEvent<{ selectedIndex: number; selected: Item }>) => void): () => void;
-  $on(eventname: "input", cb: (event: WindowEventMap["input"]) => void): () => void;
-  $on(eventname: "change", cb: (event: WindowEventMap["change"]) => void): () => void;
-  $on(eventname: "focus", cb: (event: WindowEventMap["focus"]) => void): () => void;
-  $on(eventname: "blur", cb: (event: WindowEventMap["blur"]) => void): () => void;
-  $on(eventname: "keydown", cb: (event: WindowEventMap["keydown"]) => void): () => void;
-  $on(eventname: string, cb: (event: Event) => void): () => void;
-}
+export default class Typeahead extends SvelteComponent<
+  TypeaheadProps,
+  {
+    select: CustomEvent<{ selectedIndex: number; selected: Item }>;
+    clear: CustomEvent<any>;
+    input: WindowEventMap["input"];
+    change: WindowEventMap["change"];
+    focus: WindowEventMap["focus"];
+    blur: WindowEventMap["blur"];
+    keydown: WindowEventMap["keydown"];
+  },
+  { default: { result: FuzzyResult; index: number } }
+> {}

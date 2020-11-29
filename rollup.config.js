@@ -13,6 +13,7 @@ export default () => {
       minify: !DEV,
       prefixUrl: `${pkg.homepage}/tree/master/`,
       plugins: [commonjs()],
+      style: `.code-fence li + li { margin: 0 }`,
     });
   }
 
