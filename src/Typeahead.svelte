@@ -159,6 +159,7 @@
     on:focus={() => {
       hideDropdown = false;
     }}
+    on:clear
     on:clear={() => {
       hideDropdown = false;
     }}
