@@ -1,8 +1,10 @@
 <script>
   /**
-   * @typedef {any} Item
+   * @typedef {string | number | Record<string, any>} Item
+   * @typedef {{ original: Item; index: number; score: number; string: string; }} FuzzyResult
    * @event {{ selectedIndex: number; selected: Item; }} select
-   * @slot {{ result: { index: number; original: Item; score: number; string: string; } }}
+   * @event {any} clear
+   * @slot {{ result: FuzzyResult; index: number }}
    */
 
   export let id = "typeahead-" + Math.random().toString(36);
@@ -13,7 +15,15 @@
 
   /** @type {(item: Item) => Item} */
   export let extract = (item) => item;
+
+  /** Set to `false` to prevent the first result from being selected */
   export let autoselect = true;
+
+  /** @type {FuzzyResult[]} */
+  export let results = [];
+
+  /** Set to `true` to re-focus the input after selecting a result */
+  export let focusAfterSelect = false;
 
   import fuzzy from "fuzzy";
   import Search from "svelte-search";
@@ -21,8 +31,8 @@
 
   const dispatch = createEventDispatcher();
 
-  let comboboxRef = undefined;
-  let searchRef = undefined;
+  let comboboxRef = null;
+  let searchRef = null;
   let hideDropdown = false;
   let selectedIndex = -1;
   let prevResults = "";
@@ -32,6 +42,10 @@
       selectedIndex = 0;
     }
 
+    if (prevResults !== resultsId) {
+      hideDropdown = results.length === 0;
+    }
+
     prevResults = resultsId;
   });
 
@@ -39,7 +53,7 @@
     value = extract(results[selectedIndex].original);
     dispatch("select", { selectedIndex, selected: value });
     await tick();
-    searchRef.focus();
+    if (focusAfterSelect) searchRef.focus();
     hideDropdown = true;
   }
 
@@ -53,6 +67,7 @@
 <style>
   .svelte-typeahead {
     position: relative;
+    background-color: #fff;
   }
 
   ul {
@@ -60,17 +75,14 @@
     top: 100%;
     left: 0;
     width: 100%;
-    padding: 0.5rem 0;
+    padding: 0;
     list-style: none;
-    background-color: #fff;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    border-bottom-right-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    background-color: inherit;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   li {
-    padding: 0.75rem 1rem;
-    font-size: 1.25rem;
+    padding: 0.25rem 1rem;
     cursor: pointer;
   }
 
@@ -90,111 +102,112 @@
     background-color: #cacaca;
   }
 
-  :global(.svelte-typeahead.dropdown .svelte-search input) {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
+  :global(.svelte-search label) {
+    margin-bottom: 0.25rem;
+    display: inline-flex;
+    font-size: 0.875rem;
   }
 
   :global(.svelte-search input) {
     border: 0;
     background: none;
     width: 100%;
-    font: inherit;
-    font-size: 1.5rem;
-    padding: 1rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 0.25rem;
+    font-size: 1rem;
+
+    padding: 0.25rem 1rem;
+    border-radius: 0;
+    border: 1px solid #e5e5e5;
   }
 
   :global(.svelte-search input:focus) {
-    outline: 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-color: #0f62fe;
+    outline-color: #0f62fe;
+    outline-offset: 2px;
+    outline-width: 1px;
   }
 </style>
 
 <svelte:window
-  on:click="{({ target }) => {
+  on:click={({ target }) => {
     if (!hideDropdown && results.length > 0 && comboboxRef && !comboboxRef.contains(target)) {
       hideDropdown = true;
     }
-  }}"
-/>
+  }} />
 
 <div
-  bind:this="{comboboxRef}"
+  bind:this={comboboxRef}
   role="combobox"
   aria-haspopup="listbox"
   aria-owns="{id}-listbox"
-  class="svelte-typeahead"
-  class:dropdown="{results.length > 0}"
-  aria-expanded="{!hideDropdown && results.length > 0}"
-  id="{id}"
->
+  class:svelte-typeahead={true}
+  class:dropdown={results.length > 0}
+  aria-expanded={!hideDropdown && results.length > 0}
+  {id}>
   <Search
+    label="Typeahead label"
+    placeholder="Search..."
     {...$$restProps}
-    bind:this="{searchRef}"
+    bind:this={searchRef}
     aria-autocomplete="list"
     aria-controls="{id}-listbox"
     aria-labelledby="{id}-label"
     aria-activedescendant=""
-    id="{id}"
+    {id}
     bind:value
     on:input
     on:change
     on:focus
-    on:focus="{() => {
+    on:focus={() => {
       hideDropdown = false;
-    }}"
-    on:clear="{() => {
+    }}
+    on:clear={() => {
       hideDropdown = false;
-    }}"
+    }}
     on:blur
     on:keydown
-    on:keydown="{({ key }) => {
-      switch (key) {
+    on:keydown={(e) => {
+      switch (e.key) {
         case 'Enter':
           select();
           break;
         case 'ArrowDown':
+          e.preventDefault();
           selectedIndex += 1;
           if (selectedIndex === results.length) {
             selectedIndex = 0;
           }
           break;
         case 'ArrowUp':
+          e.preventDefault();
           selectedIndex -= 1;
           if (selectedIndex < 0) {
             selectedIndex = results.length - 1;
           }
           break;
         case 'Escape':
+          e.preventDefault();
           value = '';
           searchRef.focus();
           hideDropdown = true;
           break;
       }
-    }}"
-  />
+    }} />
   {#if !hideDropdown && results.length > 0}
     <ul
-      class="svelte-typeahead-list"
+      class:svelte-typeahead-list={true}
       role="listbox"
       aria-labelledby=""
-      id="{id}-listbox"
-    >
+      id="{id}-listbox">
       {#each results as result, i}
         <li
           role="option"
           id="{id}-result"
-          class:selected="{selectedIndex === i}"
-          aria-selected="{selectedIndex === i}"
-          on:click="{() => {
+          class:selected={selectedIndex === i}
+          aria-selected={selectedIndex === i}
+          on:click={() => {
             selectedIndex = i;
             select();
-          }}"
-        >
-          <slot result="{result}">
+          }}>
+          <slot {result} index={i}>
             {@html result.string}
           </slot>
         </li>
