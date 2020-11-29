@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.0](https://github.com/metonym/svelte-typeahead/releases/tag/v1.0.0) - 2020-11-28
+
+**Features**
+
+- export reactive `results` array containing fuzzy results
+- add `focusAfterSelect` to opt in to focusing input after selecting a result
+- keydown default behavior is preventing if pressing "ArrowUp", "ArrowDown", or "Escape"
+
+**Breaking changes**
+
+- `focusAfterSelect` is `false` by default
+- redesigned default styles
+- if using TS, Svelte version >=3.30 is required
+
 ## [0.2.0](https://github.com/metonym/svelte-typeahead/releases/tag/v0.2.0) - 2020-11-17
 
 - Add TypeScript definitions
