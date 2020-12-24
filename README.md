@@ -9,6 +9,8 @@ This component uses the lightweight [fuzzy](https://github.com/mattyork/fuzzy) l
 
 Try it in the [Svelte REPL](https://svelte.dev/repl/a1b828d80de24f7e995b2365782c8d04?version=3.24.1).
 
+<!-- TOC -->
+
 ## Install
 
 ```bash
@@ -70,7 +72,7 @@ Use a slot to render custom results.
 | autoselect       | `boolean` (default: `true`)       |
 | `...$$restProps` | (forwarded to `Search` component) |
 
-## Dispatched events
+### Dispatched events
 
 ```svelte
 <script>
@@ -99,7 +101,7 @@ Use a slot to render custom results.
 </ul>
 ```
 
-## Forwarded events
+### Forwarded events
 
 - on:input
 - on:change
@@ -108,7 +110,7 @@ Use a slot to render custom results.
 - on:blur
 - on:keydown
 
-## Usage with `svite`
+## Usage with svite
 
 To use the component with [svite](https://github.com/dominikg/svite), add the following to `vite.config.js`:
 
