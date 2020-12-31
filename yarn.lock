@@ -62,11 +62,6 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
-"@tsconfig/svelte@^1.0.10":
-  version "1.0.10"
-  resolved "https://registry.npmjs.org/@tsconfig/svelte/-/svelte-1.0.10.tgz#30ec7feeee0bdf38b12a50f0686f8a2e7b6b9dc0"
-  integrity sha512-EBrpH2iXXfaf/9z81koiDYkp2mlwW2XzFcAqn6qh7VKyP8zBvHHAQzNhY+W9vH5arAjmGAm5g8ElWq6YmXm3ig==
-
 "@types/estree@*":
   version "0.0.45"
   resolved "https://registry.npmjs.org/@types/estree/-/estree-0.0.45.tgz#e9387572998e5ecdac221950dab3e8c3b16af884"
@@ -803,10 +798,10 @@ svelte-preprocess@^4.0.0:
     detect-indent "^6.0.0"
     strip-indent "^3.0.0"
 
-svelte-readme@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/svelte-readme/-/svelte-readme-2.1.1.tgz#6f001835c5e0228c901aafadd3828235fc3b1977"
-  integrity sha512-wTmORhcfsNCHsR624xLMhSrwAuPj7w5m3+3M6W2m0ThoDv9q3S8+UTMyrZUS6wW4Tyor5o/AQ+bZcqD0E26ZKw==
+svelte-readme@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/svelte-readme/-/svelte-readme-2.1.2.tgz#5a1200d60af724c0e1ab988e2b25223efd4b1def"
+  integrity sha512-0Y8Q6GcCsfkKkJgigNUK/Gqg3Tf12sfK8Vl1GdR1ou0r0Rd8wDGDoZYhueEwrUPJaLgS0pApczSPjUwcvn3GcQ==
   dependencies:
     "@rollup/plugin-node-resolve" "^11.0.1"
     "@rollup/plugin-virtual" "^2.0.3"
@@ -823,10 +818,10 @@ svelte-readme@^2.1.1:
     rollup-plugin-svelte "^7.0.0"
     rollup-plugin-terser "^7.0.2"
 
-svelte-search@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.npmjs.org/svelte-search/-/svelte-search-0.2.0.tgz#61822a37bdbad879227c7b357793bb64707d1378"
-  integrity sha512-uvCrtZWeuFQ4SUwaZcXwSv/Jw6SJDd3L/03iEdTtQvHzO4bJPtEjXUnZc4pQoEpoCHK2ZNFq8csLqoqoyLd1Dg==
+svelte-search@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/svelte-search/-/svelte-search-1.0.0.tgz#f166f55b65102fcffcec836f6ff5eab93e30ebef"
+  integrity sha512-r09Q/CZ2xBfGJYYzD4OePOnFDqBD4pWMjfnMh9UnVwXYPWO5UWqP12WoqOpIqOC9n9vxyMa1PKDTQcOkZh2ufQ==
 
 svelte@^3.31.0:
   version "3.31.0"
@@ -858,11 +853,6 @@ typescript@*:
   version "4.1.2"
   resolved "https://registry.npmjs.org/typescript/-/typescript-4.1.2.tgz#6369ef22516fe5e10304aae5a5c4862db55380e9"
   integrity sha512-thGloWsGH3SOxv1SoY7QojKi0tc+8FnOmiarEGMbd/lar7QOEd3hvlx3Fp5y6FlDUGl9L+pd4n2e+oToGMmhRQ==
-
-typescript@^4.1.3:
-  version "4.1.3"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-4.1.3.tgz#519d582bd94cba0cf8934c7d8e8467e473f53bb7"
-  integrity sha512-B3ZIOf1IKeH2ixgHhj6la6xdwR9QrLC5d1VKeCSY4tvkqhF2eqd9O7txNlS0PO3GrBAFIdr3L1ndNwteUbZLYg==
 
 uc.micro@^1.0.1, uc.micro@^1.0.5:
   version "1.0.6"

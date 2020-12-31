@@ -1,7 +1,6 @@
 # svelte-typeahead
 
 [![NPM][npm]][npm-url]
-[![Build][build]][build-badge]
 
 > Accessible, fuzzy search typeahead component.
 
@@ -20,6 +19,18 @@ npm i -D svelte-typeahead
 ```
 
 ## Usage
+
+[svelte-search](https://github.com/metonym/svelte-search) is used as the underlying search input component. `$$restProps` are forwarded to `svelte-search`.
+
+### Styling
+
+**Note:** this component is unstyled by design. You can target the component using the `[data-svelte-typeahead]` selector.
+
+```css
+:global([data-svelte-typeahead]) {
+  margin: 1rem;
+}
+```
 
 ### Basic
 
@@ -113,6 +124,7 @@ Use a slot to render custom results.
 
 ### Forwarded events
 
+- on:type
 - on:input
 - on:change
 - on:focus
@@ -147,5 +159,3 @@ Svelte version 3.31 or greater is required if using TypeScript.
 
 [npm]: https://img.shields.io/npm/v/svelte-typeahead.svg?color=%23ff3e00&style=for-the-badge
 [npm-url]: https://npmjs.com/package/svelte-typeahead
-[build]: https://img.shields.io/travis/com/metonym/svelte-typeahead?style=for-the-badge
-[build-badge]: https://travis-ci.com/metonym/svelte-typeahead

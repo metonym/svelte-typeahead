@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0](https://github.com/metonym/svelte-typeahead/releases/tag/v1.0.0) - 2020-12-31
+
+**Breaking Changes**
+
+- upgrade `svelte-search` to version 1.0.0
+- defer to default `label`, `placeholder` props from `search-svelte`
+- use `SvelteComponentTyped` interface in TypeScript definitions
+
 ## [1.0.0](https://github.com/metonym/svelte-typeahead/releases/tag/v1.0.0) - 2020-11-28
 
 **Features**

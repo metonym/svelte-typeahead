@@ -8,7 +8,9 @@ export default () => {
   if (process.env.BUNDLE !== "true") {
     return svelteReadme({
       plugins: [commonjs()],
-      style: `.code-fence li + li { margin: 0 }`,
+      style: `
+        .code-fence li + li { margin: 0 }
+      `,
     });
   }
 

@@ -65,7 +65,7 @@
 </script>
 
 <style>
-  .svelte-typeahead {
+  [data-svelte-typeahead] {
     position: relative;
     background-color: #fff;
   }
@@ -102,15 +102,15 @@
     background-color: #cacaca;
   }
 
-  :global(.svelte-search label) {
+  :global([data-svelte-search] label) {
     margin-bottom: 0.25rem;
     display: inline-flex;
     font-size: 0.875rem;
   }
 
-  :global(.svelte-search input) {
+  :global([data-svelte-search] input) {
     width: 100%;
-    padding: 0.25rem 1rem;
+    padding: 0.5rem 0.75rem;
     background: none;
     font-size: 1rem;
     border: 0;
@@ -118,7 +118,7 @@
     border: 1px solid #e5e5e5;
   }
 
-  :global(.svelte-search input:focus) {
+  :global([data-svelte-search] input:focus) {
     outline-color: #0f62fe;
     outline-offset: 2px;
     outline-width: 1px;
@@ -133,17 +133,15 @@
   }} />
 
 <div
+  data-svelte-typeahead
   bind:this={comboboxRef}
   role="combobox"
   aria-haspopup="listbox"
   aria-owns="{id}-listbox"
-  class:svelte-typeahead={true}
   class:dropdown={results.length > 0}
   aria-expanded={!hideDropdown && results.length > 0}
   {id}>
   <Search
-    label="Typeahead label"
-    placeholder="Search..."
     {...$$restProps}
     bind:this={searchRef}
     aria-autocomplete="list"
@@ -152,6 +150,7 @@
     aria-activedescendant=""
     {id}
     bind:value
+    on:type
     on:input
     on:change
     on:focus

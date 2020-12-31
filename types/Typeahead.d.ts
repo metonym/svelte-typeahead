@@ -57,6 +57,7 @@ export default class Typeahead extends SvelteComponentTyped<
       selectedIndex: number;
       selected: Item;
     }>;
+    type: CustomEvent<string>;
     clear: CustomEvent<any>;
     input: WindowEventMap["input"];
     change: WindowEventMap["change"];
