@@ -1,5 +1,5 @@
 /// <reference types="svelte" />
-import { SvelteComponent } from "svelte";
+import { SvelteComponentTyped } from "svelte";
 import { SearchProps } from "svelte-search/types/Search";
 
 export type Item = string | number | Record<string, any>;
@@ -50,10 +50,13 @@ export interface TypeaheadProps extends SearchProps {
   focusAfterSelect?: boolean;
 }
 
-export default class Typeahead extends SvelteComponent<
+export default class Typeahead extends SvelteComponentTyped<
   TypeaheadProps,
   {
-    select: CustomEvent<{ selectedIndex: number; selected: Item }>;
+    select: CustomEvent<{
+      selectedIndex: number;
+      selected: Item;
+    }>;
     clear: CustomEvent<any>;
     input: WindowEventMap["input"];
     change: WindowEventMap["change"];
@@ -61,5 +64,10 @@ export default class Typeahead extends SvelteComponent<
     blur: WindowEventMap["blur"];
     keydown: WindowEventMap["keydown"];
   },
-  { default: { result: FuzzyResult; index: number } }
+  {
+    default: {
+      result: FuzzyResult;
+      index: number;
+    };
+  }
 > {}

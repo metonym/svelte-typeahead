@@ -4,13 +4,9 @@ import svelte from "rollup-plugin-svelte";
 import svelteReadme from "svelte-readme";
 import pkg from "./package.json";
 
-const DEV = process.env.ROLLUP_WATCH;
-const BUNDLE = process.env.BUNDLE === "true";
-
 export default () => {
-  if (!BUNDLE) {
+  if (process.env.BUNDLE !== "true") {
     return svelteReadme({
-      minify: !DEV,
       plugins: [commonjs()],
       style: `.code-fence li + li { margin: 0 }`,
     });

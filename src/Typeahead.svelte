@@ -109,12 +109,11 @@
   }
 
   :global(.svelte-search input) {
-    border: 0;
-    background: none;
     width: 100%;
-    font-size: 1rem;
-
     padding: 0.25rem 1rem;
+    background: none;
+    font-size: 1rem;
+    border: 0;
     border-radius: 0;
     border: 1px solid #e5e5e5;
   }

@@ -21,8 +21,11 @@ npm i -D svelte-typeahead
 
 ## Usage
 
+### Basic
+
 Pass an array of objects to the `data` prop. Use the `extractor` to specify the key value to search on.
 
+<!-- prettier-ignore-start -->
 ```svelte
 <script>
   import Typeahead from "svelte-typeahead";
@@ -46,6 +49,7 @@ Pass an array of objects to the `data` prop. Use the `extractor` to specify the 
 <Typeahead {data} {extract} />
 
 ```
+<!-- prettier-ignore-end -->
 
 ### Custom results
 
@@ -53,6 +57,7 @@ By default, this component uses the `fuzzy` library to highlight matching charac
 
 Use a slot to render custom results.
 
+<!-- prettier-ignore-start -->
 ```svelte
 <Typeahead {data} {extract} let:result let:index>
   <div style="color: red; font-weight: bold;">
@@ -61,8 +66,11 @@ Use a slot to render custom results.
 </Typeahead>
 
 ```
+<!-- prettier-ignore-end -->
 
 ## API
+
+### Props
 
 | Prop name        | Value                             |
 | :--------------- | :-------------------------------- |
@@ -74,6 +82,7 @@ Use a slot to render custom results.
 
 ### Dispatched events
 
+<!-- prettier-ignore-start -->
 ```svelte
 <script>
   let events = [];
@@ -100,6 +109,7 @@ Use a slot to render custom results.
   {/each}
 </ul>
 ```
+<!-- prettier-ignore-end -->
 
 ### Forwarded events
 
@@ -123,11 +133,13 @@ module.exports = {
 };
 ```
 
-## TypeScript support
+## TypeScript
 
-Svelte version 3.30 or greater is required if using TypeScript.
+Svelte version 3.31 or greater is required if using TypeScript.
 
-## [Changelog](CHANGELOG.md)
+## Changelog
+
+[Changelog](CHANGELOG.md)
 
 ## License
 
