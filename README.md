@@ -8,6 +8,10 @@ This component uses the lightweight [fuzzy](https://github.com/mattyork/fuzzy) l
 
 Try it in the [Svelte REPL](https://svelte.dev/repl/a1b828d80de24f7e995b2365782c8d04?version=3.24.1).
 
+<!-- REPO_URL -->
+
+---
+
 <!-- TOC -->
 
 ## Install

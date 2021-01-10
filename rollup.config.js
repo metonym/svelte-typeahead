@@ -5,7 +5,7 @@ import svelteReadme from "svelte-readme";
 import pkg from "./package.json";
 
 export default () => {
-  if (process.env.BUNDLE !== "true") {
+  if (!process.env.BUNDLE) {
     return svelteReadme({
       plugins: [commonjs()],
       style: `
