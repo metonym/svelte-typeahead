@@ -2,7 +2,7 @@
   /**
    * @typedef {string | number | Record<string, any>} Item
    * @typedef {{ original: Item; index: number; score: number; string: string; }} FuzzyResult
-   * @event {{ selectedIndex: number; selected: Item; original: Item; originalIndex: number; }} select
+   * @event {{ searched: string; selected: Item; selectedIndex: number; original: Item; originalIndex: number; }} select
    * @event {any} clear
    * @slot {{ result: FuzzyResult; index: number }}
    */
@@ -18,10 +18,12 @@
 
   /** Set to `false` to prevent the first result from being selected */
   export let autoselect = true;
-  
-  /** Set to `keep` to keep the search field unchanged after select, set to `clear` to auto-clear search field */
-  /** @type {"update" | "clear" | "keep"} */
-  export let inputAfterSelect = 'update';
+
+  /**
+   * Set to `keep` to keep the search field unchanged after select, set to `clear` to auto-clear search field
+   * @type {"update" | "clear" | "keep"}
+   */
+  export let inputAfterSelect = "update";
 
   /** @type {FuzzyResult[]} */
   export let results = [];
@@ -57,9 +59,9 @@
     const result = results[selectedIndex];
     const selectedValue = extract(result.original);
     const searchedValue = value;
-    
-    if (inputAfterSelect == 'clear') value = '';
-    if (inputAfterSelect == 'update') value = selectedValue;
+
+    if (inputAfterSelect == "clear") value = "";
+    if (inputAfterSelect == "update") value = selectedValue;
 
     dispatch("select", {
       selectedIndex,

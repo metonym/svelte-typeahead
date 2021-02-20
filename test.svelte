@@ -33,6 +33,7 @@
   autofocus
   hideLabel
   focusAfterSelect
+  inputAfterSelect="keep"
   debounce={800}
   {data}
   on:select={(e) => {
@@ -44,7 +45,8 @@
   }}
   bind:results
   let:result
-  let:index>
+  let:index
+>
   {@html result.string}
   {index}
   {result.score}

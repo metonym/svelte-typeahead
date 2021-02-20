@@ -39,6 +39,12 @@ export interface TypeaheadProps extends SearchProps {
   autoselect?: boolean;
 
   /**
+   * Set to `keep` to keep the search field unchanged after select, set to `clear` to auto-clear search field
+   * @default "update"
+   */
+  inputAfterSelect?: "update" | "clear" | "keep";
+
+  /**
    * @default []
    */
   results?: FuzzyResult[];
@@ -54,8 +60,9 @@ export default class Typeahead extends SvelteComponentTyped<
   TypeaheadProps,
   {
     select: CustomEvent<{
-      selectedIndex: number;
+      searched: string;
       selected: Item;
+      selectedIndex: number;
       original: Item;
       originalIndex: number;
     }>;
