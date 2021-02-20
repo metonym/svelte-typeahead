@@ -28,7 +28,7 @@ npm i -D svelte-typeahead
 
 ### Styling
 
-**Note:** this component is unstyled by design. You can target the component using the `[data-svelte-typeahead]` selector.
+**Note:** this component is minimally styled by design. You can target the component using the `[data-svelte-typeahead]` selector.
 
 ```css
 :global([data-svelte-typeahead]) {
@@ -97,6 +97,9 @@ Use a slot to render custom results.
 
 ### Dispatched events
 
+- **on:select**: dispatched when selecting a result
+- **on:clear**: dispatched when clearing the input field
+
 <!-- prettier-ignore-start -->
 ```svelte
 <script>
@@ -120,7 +123,9 @@ Use a slot to render custom results.
 
 <ul>
   {#each events as event}
-    <li>{event}</li>
+    <li>
+      <pre>{event}</pre>
+    </li>
   {/each}
 </ul>
 ```

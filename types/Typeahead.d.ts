@@ -56,6 +56,8 @@ export default class Typeahead extends SvelteComponentTyped<
     select: CustomEvent<{
       selectedIndex: number;
       selected: Item;
+      original: Item;
+      originalIndex: number;
     }>;
     type: CustomEvent<string>;
     clear: CustomEvent<any>;
