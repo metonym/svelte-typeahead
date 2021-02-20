@@ -61,7 +61,8 @@
 
     dispatch("select", {
       selectedIndex,
-      selected: value,
+      searched: value,
+      selected: selectedValue,
       original: result.original,
       originalIndex: result.index,
     });
