@@ -18,6 +18,10 @@
 
   /** Set to `false` to prevent the first result from being selected */
   export let autoselect = true;
+  
+  /** Set to `keep` to keep the search field unchanged after select, set to `clear` to auto-clear search field */
+  /** @type {"update" | "clear" | "keep"} */
+  export let inputAfterSelect = 'update';
 
   /** @type {FuzzyResult[]} */
   export let results = [];
@@ -51,12 +55,16 @@
 
   async function select() {
     const result = results[selectedIndex];
-
-    value = extract(result.original);
+    const selectedValue = extract(result.original);
+    const searchedValue = value;
+    
+    if (inputAfterSelect == 'clear') value = '';
+    if (inputAfterSelect == 'update') value = selectedValue;
 
     dispatch("select", {
       selectedIndex,
-      selected: value,
+      searched: searchedValue,
+      selected: selectedValue,
       original: result.original,
       originalIndex: result.index,
     });
