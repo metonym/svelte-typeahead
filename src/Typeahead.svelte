@@ -20,6 +20,7 @@
   export let autoselect = true;
   
   /** Set to `keep` to keep the search field unchanged after select, set to `clear` to auto-clear search field */
+  /** @type {"update" | "clear" | "keep"} */
   export let inputAfterSelect = 'update';
 
   /** @type {FuzzyResult[]} */
