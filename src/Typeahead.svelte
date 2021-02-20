@@ -55,14 +55,15 @@
 
   async function select() {
     const result = results[selectedIndex];
-    
     const selectedValue = extract(result.original);
+    const searchedValue = value;
+    
     if (inputAfterSelect == 'clear') value = '';
     if (inputAfterSelect == 'update') value = selectedValue;
 
     dispatch("select", {
       selectedIndex,
-      searched: value,
+      searched: searchedValue,
       selected: selectedValue,
       original: result.original,
       originalIndex: result.index,
