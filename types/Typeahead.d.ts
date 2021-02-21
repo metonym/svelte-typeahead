@@ -31,6 +31,11 @@ export interface TypeaheadProps extends SearchProps {
    * @default (item) => item
    */
   extract?: (item: Item) => Item;
+  
+   /**
+   * @default (item) => item
+   */
+  selection?: (item: Item) => Item;
 
   /**
    * @default (item) => false
