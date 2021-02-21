@@ -51,6 +51,38 @@
   let hideDropdown = false;
   let selectedIndex = -1;
   let prevResults = "";
+  
+  function setNextSelectedIndex(i = 0) {
+    i += 1;
+
+    selectedIndex += 1;
+    if (selectedIndex === results.length) {
+      selectedIndex = 0;
+    }
+
+    if(results.lenght == 0 || !(selectedIndex in results) || i > results.lenght) {
+      selectedIndex = -1;
+    } else if(results[selectedIndex].disabled) {
+      setNextSelectedIndex(i);
+    }
+
+  };
+
+  function setPreviousSelectedIndex(i = 0) {
+    i += 1;
+
+    selectedIndex -= 1;
+    if (selectedIndex < 0) {
+      selectedIndex = results.length - 1;
+    }
+
+    if(results.lenght == 0 || i > results.lenght) {
+      selectedIndex = -1;
+    } else if(results[selectedIndex].disabled) {
+      setPreviousSelectedIndex(i);
+    }
+
+  };
 
   afterUpdate(() => {
     if (prevResults !== resultsId && autoselect) {
@@ -146,17 +178,11 @@
           break;
         case 'ArrowDown':
           e.preventDefault();
-          selectedIndex += 1;
-          if (selectedIndex === results.length) {
-            selectedIndex = 0;
-          }
+          setNextSelectedIndex();
           break;
         case 'ArrowUp':
           e.preventDefault();
-          selectedIndex -= 1;
-          if (selectedIndex < 0) {
-            selectedIndex = results.length - 1;
-          }
+          setPreviousSelectedIndex();
           break;
         case 'Escape':
           e.preventDefault();
