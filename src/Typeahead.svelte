@@ -51,43 +51,10 @@
   let hideDropdown = false;
   let selectedIndex = -1;
   let prevResults = "";
-  
-  function setNextSelectedIndex(i = 0) {
-    i += 1;
-
-    selectedIndex += 1;
-    if (selectedIndex === results.length) {
-      selectedIndex = 0;
-    }
-
-    if(results.lenght == 0 || !(selectedIndex in results) || i > results.lenght) {
-      selectedIndex = -1;
-    } else if(results[selectedIndex].disabled) {
-      setNextSelectedIndex(i);
-    }
-
-  };
-
-  function setPreviousSelectedIndex(i = 0) {
-    i += 1;
-
-    selectedIndex -= 1;
-    if (selectedIndex < 0) {
-      selectedIndex = results.length - 1;
-    }
-
-    if(results.lenght == 0 || !(selectedIndex in results) || i > results.lenght) {
-      selectedIndex = -1;
-    } else if(results[selectedIndex].disabled) {
-      setPreviousSelectedIndex(i);
-    }
-
-  };
 
   afterUpdate(() => {
     if (prevResults !== resultsId && autoselect) {
-       selectedIndex = -1;
-      setNextSelectedIndex();
+       selectedIndex = results.findIndex(result => !result.disabled);
     }
 
     if (prevResults !== resultsId) {
@@ -179,11 +146,18 @@
           break;
         case 'ArrowDown':
           e.preventDefault();
-          setNextSelectedIndex();
+          for (selectedIndex++;(selectedIndex in results && results[selectedIndex].disabled); selectedIndex++) { }
+          if(!(selectedIndex in results) || (selectedIndex in results && results[selectedIndex].disabled)) {
+            selectedIndex = results.findIndex(result => !result.disabled);
+          }
           break;
         case 'ArrowUp':
           e.preventDefault();
-          setPreviousSelectedIndex();
+          for (selectedIndex--;(selectedIndex in results && results[selectedIndex].disabled); selectedIndex--) { }
+          if(!(selectedIndex in results) || (selectedIndex in results && results[selectedIndex].disabled)) {
+            let reverseselectedIndex = results.slice().reverse().findIndex(result => !result.disabled) + 1;
+            selectedIndex = (reverseselectedIndex == -1) ? -1 : (results.length - reverseselectedIndex);
+          }
           break;
         case 'Escape':
           e.preventDefault();
