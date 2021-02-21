@@ -31,6 +31,16 @@ export interface TypeaheadProps extends SearchProps {
    * @default (item) => item
    */
   extract?: (item: Item) => Item;
+  
+   /**
+   * @default (item) => false
+   */
+  disable?: (item: Item) => false;
+  
+   /**
+   * @default (item) => false
+   */
+  filter?: (item: Item) => false;
 
   /**
    * Set to `false` to prevent the first result from being selected
