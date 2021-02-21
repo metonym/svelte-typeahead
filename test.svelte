@@ -24,10 +24,17 @@
   type Extract = (item: Item) => string;
 
   const extract: Extract = (item) => item.state;
+
+  type DisableOrFilter = (item: Item) => boolean;
+
+  const disable: DisableOrFilter = (item) => item.state.length > 10;
+  const filter: DisableOrFilter = (item) => item.state.length < 4;
 </script>
 
 <Typeahead
   {extract}
+  {disable}
+  {filter}
   autocapitalize={false + ''}
   placeholder="#{4}"
   autofocus
