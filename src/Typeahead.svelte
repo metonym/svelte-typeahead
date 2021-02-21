@@ -146,14 +146,14 @@
           break;
         case 'ArrowDown':
           e.preventDefault();
-          for (selectedIndex++;(selectedIndex in results && results[selectedIndex].disabled); selectedIndex++) { }
+          for (selectedIndex++;(selectedIndex in results && results[selectedIndex].disabled); selectedIndex++);
           if(!(selectedIndex in results) || (selectedIndex in results && results[selectedIndex].disabled)) {
             selectedIndex = results.findIndex(result => !result.disabled);
           }
           break;
         case 'ArrowUp':
           e.preventDefault();
-          for (selectedIndex--;(selectedIndex in results && results[selectedIndex].disabled); selectedIndex--) { }
+          for (selectedIndex--;(selectedIndex in results && results[selectedIndex].disabled); selectedIndex--);
           if(!(selectedIndex in results) || (selectedIndex in results && results[selectedIndex].disabled)) {
             let reverseselectedIndex = results.slice().reverse().findIndex(result => !result.disabled) + 1;
             selectedIndex = (reverseselectedIndex == -1) ? -1 : (results.length - reverseselectedIndex);
