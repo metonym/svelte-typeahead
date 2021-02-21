@@ -87,7 +87,7 @@ Use a slot to render custom results.
 
 Use the `filter` to filter Items out and `disable` to disable them in the result set.
 
-Excample for disabling and filtering items by their Title lenght:
+Example for disabling and filtering items by their Title lenght:
 
 <!-- prettier-ignore-start -->
 ```svelte
@@ -100,7 +100,7 @@ Excample for disabling and filtering items by their Title lenght:
 ```
 <!-- prettier-ignore-end -->
 
-Excample for disabling items after selecting them:
+Example for disabling items after selecting them:
 <!-- prettier-ignore-start -->
 ```svelte
 <script>
