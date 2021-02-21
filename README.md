@@ -115,6 +115,16 @@ Example for disabling items after selecting them:
 ```
 <!-- prettier-ignore-end -->
 
+### Focus after select
+
+Set `focusAfterSelect` to `true` to re-focus the search input after selecting a result.
+
+<!-- prettier-ignore-start -->
+```svelte
+<Typeahead {data} {extract} focusAfterSelect />
+```
+<!-- prettier-ignore-end -->
+
 ## API
 
 ### Props

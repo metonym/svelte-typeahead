@@ -15,10 +15,10 @@
 
   /** @type {(item: Item) => Item} */
   export let extract = (item) => item;
-  
+
   /** @type {(item: Item) => Item} */
   export let disable = (item) => false;
-  
+
   /** @type {(item: Item) => Item} */
   export let filter = (item) => false;
 
@@ -89,7 +89,7 @@
     .filter(value, data, options)
     .filter(({ score }) => score > 0)
     .filter((result) => !filter(result.original))
-    .map((result)=> ({ ...result, disabled: disable(result.original)}));
+    .map((result) => ({ ...result, disabled: disable(result.original) }));
   $: resultsId = results.map((result) => extract(result.original)).join("");
 </script>
 
@@ -113,7 +113,7 @@
 >
   <Search
     {...$$restProps}
-    bind:this={searchRef}
+    bind:ref={searchRef}
     aria-autocomplete="list"
     aria-controls="{id}-listbox"
     aria-labelledby="{id}-label"
@@ -176,10 +176,10 @@
           class:disabled={result.disabled}
           aria-selected={selectedIndex === i}
           on:click={() => {
-            if(!result.disabled) {
+            if (!result.disabled) {
               selectedIndex = i;
               select();
-            } 
+            }
           }}
         >
           <slot {result} index={i}>
@@ -228,9 +228,9 @@
   .selected:hover {
     background-color: #cacaca;
   }
-  
+
   .disabled {
-    opacity: .4;
+    opacity: 0.4;
     cursor: not-allowed;
   }
 
