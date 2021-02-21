@@ -85,7 +85,10 @@ Use a slot to render custom results.
 
 ### Disable and Filter Items
 
-Disabling or filter items out by its Title lenght:
+Use the `filter` to filter Items out and `disable` to disable them in the result set.
+
+Excample for disabling and filtering items by their Title lenght:
+
 <!-- prettier-ignore-start -->
 ```svelte
 <script>
@@ -97,7 +100,7 @@ Disabling or filter items out by its Title lenght:
 ```
 <!-- prettier-ignore-end -->
 
-Disable selected items:
+Excample for disabling items after selecting them:
 <!-- prettier-ignore-start -->
 ```svelte
 <script>
