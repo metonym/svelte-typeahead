@@ -87,33 +87,31 @@ Use a slot to render custom results.
 
 Use the `filter` to filter Items out and `disable` to disable them in the result set.
 
-Example for disabling and filtering items by their Title lenght:
+Example for disabling and filtering items by their title length:
 
 <!-- prettier-ignore-start -->
 ```svelte
 <script>
-    const extract = (item) => item.titel;
-    const disable = (item) => item.title.length > 4;
-    const filter = (item) => item.title.length > 8;
+    const disable = (item) => item.state.length > 4;
+    const filter = (item) => item.state.length > 8;
 </script>
-<Typeahead {data} {extract} {disable} {filter}>
+
+<Typeahead {data} extract={(item) => item.state} {disable} {filter} />
 ```
 <!-- prettier-ignore-end -->
 
 Example for disabling items after selecting them:
+
 <!-- prettier-ignore-start -->
 ```svelte
 <script>
-   function handleSelect(e) {  
-        let i = e.detail.originalIndex;
-        data[i].selected = true;
-    }
-    
-    const extract = (item) => item.titel;
-    const disable = (item) => item.selected;
+  function handleSelect(e) {  
+    let i = e.detail.originalIndex;
+    data[i].selected = true;
+  }
 </script>
 
-<Typeahead {data} {extract} {disable} on:select="{handleSelect}">
+<Typeahead {data} extract={(item) => item.state} disable={(item) => item.selected} on:select="{handleSelect}" />
 ```
 <!-- prettier-ignore-end -->
 
@@ -127,7 +125,7 @@ Example for disabling items after selecting them:
 | data             | `T[]` (default: `[]`)                               | Items to search                                                                                                                    |
 | extract          | `(T) => T`                                          | Target an item key if `data` is an object array                                                                                    |
 | disable          | `(T) => T`                                          | Pass in a function to disable items. They will show up in the results list, but wont be selectable.                                |
-| filter          | `(T) => T`                                           | Pass in a function to filter items. Thei will be hidden and do not show up at all in the results list.                               |
+| filter           | `(T) => T`                                          | Pass in a function to filter items. Thei will be hidden and do not show up at all in the results list.                             |
 | autoselect       | `boolean` (default: `true`)                         | Automatically select the first (top) result                                                                                        |
 | inputAfterSelect | `"update" or "clear" or "keep"`(default:`"update"`) | Set to `"clear"` to clear the `value` after selecting a result. Set to `"keep"` keep the search field unchanged after a selection. |
 | results          | `FuzzyResult[]` (default: `[]`)                     | Raw fuzzy results from the [fuzzy](https://github.com/mattyork/fuzzy) module                                                       |
