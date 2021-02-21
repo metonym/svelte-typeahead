@@ -4,7 +4,7 @@
 
 > Accessible, fuzzy search typeahead component.
 
-This component uses the lightweight [fuzzy](https://github.com/mattyork/fuzzy) library for typeahead and follows [WAI-ARIA guidelines](https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.1pattern/listbox-combo.html).
+This component uses the lightweight [fuzzy](https://github.com/mattyork/fuzzy) library for client-side, fuzzy search and follows [WAI-ARIA guidelines](https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.1pattern/listbox-combo.html).
 
 Try it in the [Svelte REPL](https://svelte.dev/repl/a1b828d80de24f7e995b2365782c8d04?version=3.24.1).
 
@@ -28,7 +28,7 @@ npm i -D svelte-typeahead
 
 ### Styling
 
-**Note:** this component is unstyled by design. You can target the component using the `[data-svelte-typeahead]` selector.
+**Note:** this component is minimally styled by design. You can target the component using the `[data-svelte-typeahead]` selector.
 
 ```css
 :global([data-svelte-typeahead]) {
@@ -83,19 +83,69 @@ Use a slot to render custom results.
 ```
 <!-- prettier-ignore-end -->
 
+### Disable and Filter Items
+
+Use the `filter` to filter Items out and `disable` to disable them in the result set.
+
+Example for disabling and filtering items by their title length:
+
+<!-- prettier-ignore-start -->
+```svelte
+<script>
+    const disable = (item) => item.state.length > 4;
+    const filter = (item) => item.state.length > 8;
+</script>
+
+<Typeahead {data} extract={(item) => item.state} {disable} {filter} />
+```
+<!-- prettier-ignore-end -->
+
+Example for disabling items after selecting them:
+
+<!-- prettier-ignore-start -->
+```svelte
+<script>
+  function handleSelect(e) {  
+    let i = e.detail.originalIndex;
+    data[i].selected = true;
+  }
+</script>
+
+<Typeahead {data} extract={(item) => item.state} disable={(item) => item.selected} on:select="{handleSelect}" />
+```
+<!-- prettier-ignore-end -->
+
+### Focus after select
+
+Set `focusAfterSelect` to `true` to re-focus the search input after selecting a result.
+
+<!-- prettier-ignore-start -->
+```svelte
+<Typeahead {data} {extract} focusAfterSelect />
+```
+<!-- prettier-ignore-end -->
+
 ## API
 
 ### Props
 
-| Prop name        | Value                             |
-| :--------------- | :-------------------------------- |
-| value            | `string` (default: `""`)          |
-| data             | `T[]` (default: `[]`)             |
-| extract          | `(T) => T`                        |
-| autoselect       | `boolean` (default: `true`)       |
-| `...$$restProps` | (forwarded to `Search` component) |
+| Prop name        | Value                                               | Description                                                                                                                        |
+| :--------------- | :-------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
+| value            | `string` (default: `""`)                            | Input search value                                                                                                                 |
+| data             | `T[]` (default: `[]`)                               | Items to search                                                                                                                    |
+| extract          | `(T) => T`                                          | Target an item key if `data` is an object array                                                                                    |
+| disable          | `(T) => T`                                          | Pass in a function to disable items. They will show up in the results list, but wont be selectable.                                |
+| filter           | `(T) => T`                                          | Pass in a function to filter items. Thei will be hidden and do not show up at all in the results list.                             |
+| autoselect       | `boolean` (default: `true`)                         | Automatically select the first (top) result                                                                                        |
+| inputAfterSelect | `"update" or "clear" or "keep"`(default:`"update"`) | Set to `"clear"` to clear the `value` after selecting a result. Set to `"keep"` keep the search field unchanged after a selection. |
+| results          | `FuzzyResult[]` (default: `[]`)                     | Raw fuzzy results from the [fuzzy](https://github.com/mattyork/fuzzy) module                                                       |
+| focusAfterSelect | `boolean` (default: `false`)                        | Set to `true` to re-focus the input after selecting a result.                                                                      |
+| `...$$restProps` | (forwarded to `Search` component)                   | All other props are forwarded to the input element.                                                                                |
 
 ### Dispatched events
+
+- **on:select**: dispatched when selecting a result
+- **on:clear**: dispatched when clearing the input field
 
 <!-- prettier-ignore-start -->
 ```svelte
@@ -120,13 +170,17 @@ Use a slot to render custom results.
 
 <ul>
   {#each events as event}
-    <li>{event}</li>
+    <li>
+      <pre>{event}</pre>
+    </li>
   {/each}
 </ul>
 ```
 <!-- prettier-ignore-end -->
 
 ### Forwarded events
+
+The following events are forwarded to the [svelte-search](https://github.com/metonym/svelte-search) component.
 
 - on:type
 - on:input

@@ -33,10 +33,26 @@ export interface TypeaheadProps extends SearchProps {
   extract?: (item: Item) => Item;
 
   /**
+   * @default (item) => false
+   */
+  disable?: (item: Item) => boolean;
+
+  /**
+   * @default (item) => false
+   */
+  filter?: (item: Item) => boolean;
+
+  /**
    * Set to `false` to prevent the first result from being selected
    * @default true
    */
   autoselect?: boolean;
+
+  /**
+   * Set to `keep` to keep the search field unchanged after select, set to `clear` to auto-clear search field
+   * @default "update"
+   */
+  inputAfterSelect?: "update" | "clear" | "keep";
 
   /**
    * @default []
@@ -54,8 +70,11 @@ export default class Typeahead extends SvelteComponentTyped<
   TypeaheadProps,
   {
     select: CustomEvent<{
-      selectedIndex: number;
+      searched: string;
       selected: Item;
+      selectedIndex: number;
+      original: Item;
+      originalIndex: number;
     }>;
     type: CustomEvent<string>;
     clear: CustomEvent<any>;
