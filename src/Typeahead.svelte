@@ -76,7 +76,7 @@
       selectedIndex = results.length - 1;
     }
 
-    if(results.lenght == 0 || i > results.lenght) {
+    if(results.lenght == 0 || !(selectedIndex in results) || i > results.lenght) {
       selectedIndex = -1;
     } else if(results[selectedIndex].disabled) {
       setPreviousSelectedIndex(i);
