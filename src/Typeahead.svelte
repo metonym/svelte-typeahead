@@ -17,7 +17,7 @@
   export let extract = (item) => item;
   
   /** @type {(item: Item) => Item} */
-  export let disable = (item) => item;
+  export let disable = (item) => false;
   
   /** @type {(item: Item) => Item} */
   export let filter = (item) => false;
