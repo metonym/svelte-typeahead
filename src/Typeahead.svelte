@@ -118,7 +118,6 @@
     aria-controls="{id}-listbox"
     aria-labelledby="{id}-label"
     aria-activedescendant=""
-    {id}
     bind:value
     on:type
     on:input
