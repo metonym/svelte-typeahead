@@ -86,7 +86,7 @@
 
   afterUpdate(() => {
     if (prevResults !== resultsId && autoselect) {
-      selectedIndex = 0;
+      setNextSelectedIndex();
     }
 
     if (prevResults !== resultsId) {
