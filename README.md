@@ -4,7 +4,7 @@
 
 > Accessible, fuzzy search typeahead component.
 
-This component uses the lightweight [fuzzy](https://github.com/mattyork/fuzzy) library for typeahead and follows [WAI-ARIA guidelines](https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.1pattern/listbox-combo.html).
+This component uses the lightweight [fuzzy](https://github.com/mattyork/fuzzy) library for client-side, fuzzy search and follows [WAI-ARIA guidelines](https://www.w3.org/TR/wai-aria-practices/examples/combobox/aria1.1pattern/listbox-combo.html).
 
 Try it in the [Svelte REPL](https://svelte.dev/repl/a1b828d80de24f7e995b2365782c8d04?version=3.24.1).
 
@@ -28,7 +28,7 @@ npm i -D svelte-typeahead
 
 ### Styling
 
-**Note:** this component is unstyled by design. You can target the component using the `[data-svelte-typeahead]` selector.
+**Note:** this component is minimally styled by design. You can target the component using the `[data-svelte-typeahead]` selector.
 
 ```css
 :global([data-svelte-typeahead]) {
@@ -87,15 +87,21 @@ Use a slot to render custom results.
 
 ### Props
 
-| Prop name        | Value                             |
-| :--------------- | :-------------------------------- |
-| value            | `string` (default: `""`)          |
-| data             | `T[]` (default: `[]`)             |
-| extract          | `(T) => T`                        |
-| autoselect       | `boolean` (default: `true`)       |
-| `...$$restProps` | (forwarded to `Search` component) |
+| Prop name        | Value                                               | Description                                                                                                                        |
+| :--------------- | :-------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
+| value            | `string` (default: `""`)                            | Input search value                                                                                                                 |
+| data             | `T[]` (default: `[]`)                               | Items to search                                                                                                                    |
+| extract          | `(T) => T`                                          | Target an item key if `data` is an object array                                                                                    |
+| autoselect       | `boolean` (default: `true`)                         | Automatically select the first (top) result                                                                                        |
+| inputAfterSelect | `"update" or "clear" or "keep"`(default:`"update"`) | Set to `"clear"` to clear the `value` after selecting a result. Set to `"keep"` keep the search field unchanged after a selection. |
+| results          | `FuzzyResult[]` (default: `[]`)                     | Raw fuzzy results from the [fuzzy](https://github.com/mattyork/fuzzy) module                                                       |
+| focusAfterSelect | `boolean` (default: `false`)                        | Set to `true` to re-focus the input after selecting a result.                                                                      |
+| `...$$restProps` | (forwarded to `Search` component)                   | All other props are forwarded to the input element.                                                                                |
 
 ### Dispatched events
+
+- **on:select**: dispatched when selecting a result
+- **on:clear**: dispatched when clearing the input field
 
 <!-- prettier-ignore-start -->
 ```svelte
@@ -120,13 +126,17 @@ Use a slot to render custom results.
 
 <ul>
   {#each events as event}
-    <li>{event}</li>
+    <li>
+      <pre>{event}</pre>
+    </li>
   {/each}
 </ul>
 ```
 <!-- prettier-ignore-end -->
 
 ### Forwarded events
+
+The following events are forwarded to the [svelte-search](https://github.com/metonym/svelte-search) component.
 
 - on:type
 - on:input

@@ -2,7 +2,7 @@
   /**
    * @typedef {string | number | Record<string, any>} Item
    * @typedef {{ original: Item; index: number; score: number; string: string; }} FuzzyResult
-   * @event {{ selectedIndex: number; selected: Item; }} select
+   * @event {{ searched: string; selected: Item; selectedIndex: number; original: Item; originalIndex: number; }} select
    * @event {any} clear
    * @slot {{ result: FuzzyResult; index: number }}
    */
@@ -18,6 +18,12 @@
 
   /** Set to `false` to prevent the first result from being selected */
   export let autoselect = true;
+
+  /**
+   * Set to `keep` to keep the search field unchanged after select, set to `clear` to auto-clear search field
+   * @type {"update" | "clear" | "keep"}
+   */
+  export let inputAfterSelect = "update";
 
   /** @type {FuzzyResult[]} */
   export let results = [];
@@ -50,10 +56,25 @@
   });
 
   async function select() {
-    value = extract(results[selectedIndex].original);
-    dispatch("select", { selectedIndex, selected: value });
+    const result = results[selectedIndex];
+    const selectedValue = extract(result.original);
+    const searchedValue = value;
+
+    if (inputAfterSelect == "clear") value = "";
+    if (inputAfterSelect == "update") value = selectedValue;
+
+    dispatch("select", {
+      selectedIndex,
+      searched: searchedValue,
+      selected: selectedValue,
+      original: result.original,
+      originalIndex: result.index,
+    });
+
     await tick();
+
     if (focusAfterSelect) searchRef.focus();
+
     hideDropdown = true;
   }
 
@@ -63,6 +84,101 @@
     .filter(({ score }) => score > 0);
   $: resultsId = results.map((result) => extract(result.original)).join("");
 </script>
+
+<svelte:window
+  on:click={({ target }) => {
+    if (!hideDropdown && results.length > 0 && comboboxRef && !comboboxRef.contains(target)) {
+      hideDropdown = true;
+    }
+  }}
+/>
+
+<div
+  data-svelte-typeahead
+  bind:this={comboboxRef}
+  role="combobox"
+  aria-haspopup="listbox"
+  aria-owns="{id}-listbox"
+  class:dropdown={results.length > 0}
+  aria-expanded={!hideDropdown && results.length > 0}
+  {id}
+>
+  <Search
+    {...$$restProps}
+    bind:this={searchRef}
+    aria-autocomplete="list"
+    aria-controls="{id}-listbox"
+    aria-labelledby="{id}-label"
+    aria-activedescendant=""
+    {id}
+    bind:value
+    on:type
+    on:input
+    on:change
+    on:focus
+    on:focus={() => {
+      hideDropdown = false;
+    }}
+    on:clear
+    on:clear={() => {
+      hideDropdown = false;
+    }}
+    on:blur
+    on:keydown
+    on:keydown={(e) => {
+      switch (e.key) {
+        case 'Enter':
+          select();
+          break;
+        case 'ArrowDown':
+          e.preventDefault();
+          selectedIndex += 1;
+          if (selectedIndex === results.length) {
+            selectedIndex = 0;
+          }
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          selectedIndex -= 1;
+          if (selectedIndex < 0) {
+            selectedIndex = results.length - 1;
+          }
+          break;
+        case 'Escape':
+          e.preventDefault();
+          value = '';
+          searchRef.focus();
+          hideDropdown = true;
+          break;
+      }
+    }}
+  />
+  {#if !hideDropdown && results.length > 0}
+    <ul
+      class:svelte-typeahead-list={true}
+      role="listbox"
+      aria-labelledby=""
+      id="{id}-listbox"
+    >
+      {#each results as result, i}
+        <li
+          role="option"
+          id="{id}-result"
+          class:selected={selectedIndex === i}
+          aria-selected={selectedIndex === i}
+          on:click={() => {
+            selectedIndex = i;
+            select();
+          }}
+        >
+          <slot {result} index={i}>
+            {@html result.string}
+          </slot>
+        </li>
+      {/each}
+    </ul>
+  {/if}
+</div>
 
 <style>
   [data-svelte-typeahead] {
@@ -124,93 +240,3 @@
     outline-width: 1px;
   }
 </style>
-
-<svelte:window
-  on:click={({ target }) => {
-    if (!hideDropdown && results.length > 0 && comboboxRef && !comboboxRef.contains(target)) {
-      hideDropdown = true;
-    }
-  }} />
-
-<div
-  data-svelte-typeahead
-  bind:this={comboboxRef}
-  role="combobox"
-  aria-haspopup="listbox"
-  aria-owns="{id}-listbox"
-  class:dropdown={results.length > 0}
-  aria-expanded={!hideDropdown && results.length > 0}
-  {id}>
-  <Search
-    {...$$restProps}
-    bind:this={searchRef}
-    aria-autocomplete="list"
-    aria-controls="{id}-listbox"
-    aria-labelledby="{id}-label"
-    aria-activedescendant=""
-    {id}
-    bind:value
-    on:type
-    on:input
-    on:change
-    on:focus
-    on:focus={() => {
-      hideDropdown = false;
-    }}
-    on:clear
-    on:clear={() => {
-      hideDropdown = false;
-    }}
-    on:blur
-    on:keydown
-    on:keydown={(e) => {
-      switch (e.key) {
-        case 'Enter':
-          select();
-          break;
-        case 'ArrowDown':
-          e.preventDefault();
-          selectedIndex += 1;
-          if (selectedIndex === results.length) {
-            selectedIndex = 0;
-          }
-          break;
-        case 'ArrowUp':
-          e.preventDefault();
-          selectedIndex -= 1;
-          if (selectedIndex < 0) {
-            selectedIndex = results.length - 1;
-          }
-          break;
-        case 'Escape':
-          e.preventDefault();
-          value = '';
-          searchRef.focus();
-          hideDropdown = true;
-          break;
-      }
-    }} />
-  {#if !hideDropdown && results.length > 0}
-    <ul
-      class:svelte-typeahead-list={true}
-      role="listbox"
-      aria-labelledby=""
-      id="{id}-listbox">
-      {#each results as result, i}
-        <li
-          role="option"
-          id="{id}-result"
-          class:selected={selectedIndex === i}
-          aria-selected={selectedIndex === i}
-          on:click={() => {
-            selectedIndex = i;
-            select();
-          }}>
-          <slot {result} index={i}>
-            {@html result.string}
-          </slot>
-        </li>
-      {/each}
-    </ul>
-  {/if}
-</div>
