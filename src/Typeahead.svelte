@@ -236,8 +236,9 @@
     background-color: #cacaca;
   }
 
-  .active {
-    border: #0f62fe 1px solid !important;
+  .active,
+  li:not(:last-of-type).active {
+    border: #0f62fe 1px solid;
   }
 
   .disabled {
