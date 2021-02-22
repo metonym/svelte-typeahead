@@ -44,7 +44,7 @@
   const dispatch = createEventDispatcher();
 
   let comboboxRef = null;
-  let searchRef = null;
+  export let searchRef = null;
   let hideDropdown = false;
   let selectedIndex = -1;
   let prevResults = "";
@@ -69,6 +69,12 @@
     if (inputAfterSelect == "clear") value = "";
     if (inputAfterSelect == "update") value = selectedValue;
 
+    await tick();
+
+    if (focusAfterSelect) searchRef.focus();
+
+    hideDropdown = true;
+    
     dispatch("select", {
       selectedIndex,
       searched: searchedValue,
@@ -77,11 +83,6 @@
       originalIndex: result.index,
     });
 
-    await tick();
-
-    if (focusAfterSelect) searchRef.focus();
-
-    hideDropdown = true;
   }
 
   $: options = { pre: "<mark>", post: "</mark>", extract };
