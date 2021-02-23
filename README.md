@@ -236,6 +236,10 @@ module.exports = {
 
 Svelte version 3.31 or greater is required if using TypeScript.
 
+## Internet Explorer
+
+To make this component compatible with IE11 you'll need to polyfill `findIndex`.
+
 ## Changelog
 
 [Changelog](CHANGELOG.md)
