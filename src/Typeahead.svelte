@@ -15,6 +15,9 @@
 
   /** @type {(item: Item) => Item} */
   export let extract = (item) => item;
+  
+  /** @type {(item: Item) => Item} */
+  export let selection = (item) => false;
 
   /** @type {(item: Item) => Item} */
   export let disable = (item) => false;
@@ -51,7 +54,7 @@
 
   afterUpdate(() => {
     if (prevResults !== resultsId && autoselect) {
-      selectedIndex = 0;
+       selectedIndex = results.findIndex(result => !result.disabled);
     }
 
     if (prevResults !== resultsId) {
@@ -89,7 +92,11 @@
     .filter(value, data, options)
     .filter(({ score }) => score > 0)
     .filter((result) => !filter(result.original))
-    .map((result) => ({ ...result, disabled: disable(result.original) }));
+    .map((result)=> ({ 
+      ...result, 
+      disabled: disable(result.original), 
+      selected: selection(result.original)
+    }));
   $: resultsId = results.map((result) => extract(result.original)).join("");
 </script>
 
@@ -139,16 +146,17 @@
           break;
         case 'ArrowDown':
           e.preventDefault();
-          selectedIndex += 1;
-          if (selectedIndex === results.length) {
-            selectedIndex = 0;
+          for (selectedIndex++;(selectedIndex in results && results[selectedIndex].disabled); selectedIndex++);
+          if(!(selectedIndex in results) || (selectedIndex in results && results[selectedIndex].disabled)) {
+            selectedIndex = results.findIndex(result => !result.disabled);
           }
           break;
         case 'ArrowUp':
           e.preventDefault();
-          selectedIndex -= 1;
-          if (selectedIndex < 0) {
-            selectedIndex = results.length - 1;
+          for (selectedIndex--;(selectedIndex in results && results[selectedIndex].disabled); selectedIndex--);
+          if(!(selectedIndex in results) || (selectedIndex in results && results[selectedIndex].disabled)) {
+            let reverseselectedIndex = results.slice().reverse().findIndex(result => !result.disabled) + 1;
+            selectedIndex = (reverseselectedIndex == -1) ? -1 : (results.length - reverseselectedIndex);
           }
           break;
         case 'Escape':
@@ -171,7 +179,8 @@
         <li
           role="option"
           id="{id}-result"
-          class:selected={selectedIndex === i}
+          class:active={selectedIndex === i}
+          class:selected={result.selected}
           class:disabled={result.disabled}
           aria-selected={selectedIndex === i}
           on:click={() => {
@@ -228,18 +237,22 @@
     background-color: #cacaca;
   }
 
+  .active {
+    background-color: #d8e9f3;
+  }
+
   .disabled {
     opacity: 0.4;
     cursor: not-allowed;
   }
 
-  :global([data-svelte-search] label) {
+  [data-svelte-typeahead] :global([data-svelte-search] label) {
     margin-bottom: 0.25rem;
     display: inline-flex;
     font-size: 0.875rem;
   }
 
-  :global([data-svelte-search] input) {
+  [data-svelte-typeahead] :global([data-svelte-search] input) {
     width: 100%;
     padding: 0.5rem 0.75rem;
     background: none;
@@ -249,7 +262,7 @@
     border: 1px solid #e5e5e5;
   }
 
-  :global([data-svelte-search] input:focus) {
+  [data-svelte-typeahead] :global([data-svelte-search] input:focus) {
     outline-color: #0f62fe;
     outline-offset: 2px;
     outline-width: 1px;
