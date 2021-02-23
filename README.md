@@ -40,7 +40,6 @@ npm i -D svelte-typeahead
 
 Pass an array of objects to the `data` prop. Use the `extractor` to specify the key value to search on.
 
-<!-- prettier-ignore-start -->
 ```svelte
 <script>
   import Typeahead from "svelte-typeahead";
@@ -83,9 +82,32 @@ Use a slot to render custom results.
 ```
 <!-- prettier-ignore-end -->
 
+### Selected Items
+
+The `selection` can hold a function to return the items which should get the `selected` class in the results.
+
+Example for switching items on select:
+<!-- prettier-ignore-start -->
+```svelte
+<script>
+
+  function handleSelect(e) {   
+        let i = e.detail.originalIndex;
+        data[i].selected = !data[i].selected;
+    }
+
+</script>
+
+<Typeahead {data} extract={(item) => item.state} selection={(item) => item.selected} on:select="{handleSelect} />
+```
+<!-- prettier-ignore-end -->
+
+*Hint: Required items should match `selection` and `disabled` to be shown as selected and prevent them from unselection. Further styling may be needed.*
 ### Disable and Filter Items
 
 Use the `filter` to filter Items out and `disable` to disable them in the result set.
+- Filtered items are not part of the results at all.
+- Disabled itesm receive the class `disbaled` and will not fire an `on:select` event.
 
 Example for disabling and filtering items by their title length:
 
@@ -100,6 +122,7 @@ Example for disabling and filtering items by their title length:
 ```
 <!-- prettier-ignore-end -->
 
+
 Example for disabling items after selecting them:
 
 <!-- prettier-ignore-start -->
@@ -107,11 +130,11 @@ Example for disabling items after selecting them:
 <script>
   function handleSelect(e) {  
     let i = e.detail.originalIndex;
-    data[i].selected = true;
+    data[i].disabled = true;
   }
 </script>
 
-<Typeahead {data} extract={(item) => item.state} disable={(item) => item.selected} on:select="{handleSelect}" />
+<Typeahead {data} extract={(item) => item.state} disable={(item) => item.disabled} on:select="{handleSelect}" />
 ```
 <!-- prettier-ignore-end -->
 
@@ -129,18 +152,19 @@ Set `focusAfterSelect` to `true` to re-focus the search input after selecting a 
 
 ### Props
 
-| Prop name        | Value                                               | Description                                                                                                                        |
-| :--------------- | :-------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
-| value            | `string` (default: `""`)                            | Input search value                                                                                                                 |
-| data             | `T[]` (default: `[]`)                               | Items to search                                                                                                                    |
-| extract          | `(T) => T`                                          | Target an item key if `data` is an object array                                                                                    |
-| disable          | `(T) => T`                                          | Pass in a function to disable items. They will show up in the results list, but wont be selectable.                                |
-| filter           | `(T) => T`                                          | Pass in a function to filter items. Thei will be hidden and do not show up at all in the results list.                             |
-| autoselect       | `boolean` (default: `true`)                         | Automatically select the first (top) result                                                                                        |
-| inputAfterSelect | `"update" or "clear" or "keep"`(default:`"update"`) | Set to `"clear"` to clear the `value` after selecting a result. Set to `"keep"` keep the search field unchanged after a selection. |
-| results          | `FuzzyResult[]` (default: `[]`)                     | Raw fuzzy results from the [fuzzy](https://github.com/mattyork/fuzzy) module                                                       |
-| focusAfterSelect | `boolean` (default: `false`)                        | Set to `true` to re-focus the input after selecting a result.                                                                      |
-| `...$$restProps` | (forwarded to `Search` component)                   | All other props are forwarded to the input element.                                                                                |
+| Prop name        | Value                                               | Description                                                                                                                          |
+| :--------------- | :-------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------   |
+| value            | `string` (default: `""`)                            | Input search value                                                                                                                   |
+| data             | `T[]` (default: `[]`)                               | Items to search                                                                                                                      |
+| extract          | `(T) => T`                                          | Target an item key if `data` is an object array                                                                                      |
+| selection        | `(T) => T`                                          | Pass in a function to select items. They will reveice the class `selected`.                                                          |
+| disable          | `(T) => T`                                          | Pass in a function to disable items. They will show up in the results list and receive the class `disabled`, but wont be selectable. |
+| filter           | `(T) => T`                                          | Pass in a function to filter items. Thei will be hidden and do not show up at all in the results list.                               |
+| autoselect       | `boolean` (default: `true`)                         | Automatically select the first (top) result                                                                                          |
+| inputAfterSelect | `"update" or "clear" or "keep"`(default:`"update"`) | Set to `"clear"` to clear the `value` after selecting a result. Set to `"keep"` keep the search field unchanged after a selection.   |
+| results          | `FuzzyResult[]` (default: `[]`)                     | Raw fuzzy results from the [fuzzy](https://github.com/mattyork/fuzzy) module                                                         |
+| focusAfterSelect | `boolean` (default: `false`)                        | Set to `true` to re-focus the input after selecting a result.                                                                        |
+| `...$$restProps` | (forwarded to `Search` component)                   | All other props are forwarded to the input element.                                                                                  |
 
 ### Dispatched events
 
