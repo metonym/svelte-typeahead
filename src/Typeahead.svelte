@@ -82,9 +82,12 @@
 
     await tick();
 
-    if (focusAfterSelect) searchRef.focus();
-
-    hideDropdown = true;
+    if (focusAfterSelect) {
+      searchRef.focus();
+    } else {
+      hideDropdown = true;
+    }
+    
   }
 
   $: options = { pre: "<mark>", post: "</mark>", extract };
