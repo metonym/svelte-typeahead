@@ -1,6 +1,11 @@
-# svelte-typeahead
+# svelte-typeahead-multiselect
 
-[![NPM][npm]][npm-url]
+---
+
+**This fork** of [svelte-typeahead](https://github.com/metonym/svelte-typeahead) uses a slightly different behaviour for `focusAfterSelect` set to `true`.
+It keeps the search results open to enable the user to select more entries directly.
+
+---
 
 > Accessible, fuzzy search typeahead component.
 
@@ -214,6 +219,3 @@ Svelte version 3.31 or greater is required if using TypeScript.
 ## License
 
 [MIT](LICENSE)
-
-[npm]: https://img.shields.io/npm/v/svelte-typeahead.svg?color=%23ff3e00&style=for-the-badge
-[npm-url]: https://npmjs.com/package/svelte-typeahead
