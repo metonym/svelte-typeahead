@@ -22,9 +22,9 @@ Try it in the [Svelte REPL](https://svelte.dev/repl/a1b828d80de24f7e995b2365782c
 ## Install
 
 ```bash
-yarn add -D svelte-typeahead
+yarn add -D Amerlander/svelte-typeahead-multiselect
 # OR
-npm i -D svelte-typeahead
+npm i -D Amerlander/svelte-typeahead-multiselect
 ```
 
 ## Usage
