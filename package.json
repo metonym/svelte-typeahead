@@ -1,5 +1,5 @@
 {
-  "name": "svelte-typeahead",
+  "name": "svelte-typeahead-multiselect",
   "version": "2.3.0",
   "license": "MIT",
   "description": "Accessible, fuzzy search typeahead component",
