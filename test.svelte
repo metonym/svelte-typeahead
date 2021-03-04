@@ -35,6 +35,7 @@
   {extract}
   {disable}
   {filter}
+  limit={1}
   autocapitalize={false + ''}
   placeholder="#{4}"
   autofocus

@@ -37,6 +37,12 @@
   /** Set to `true` to re-focus the input after selecting a result */
   export let focusAfterSelect = false;
 
+  /**
+   * Specify the maximum number of results to return
+   * @type {number}
+   */
+  export let limit = Infinity;
+
   import fuzzy from "fuzzy";
   import Search from "svelte-search";
   import { tick, createEventDispatcher, afterUpdate } from "svelte";
@@ -88,6 +94,7 @@
   $: results = fuzzy
     .filter(value, data, options)
     .filter(({ score }) => score > 0)
+    .slice(0, limit)
     .filter((result) => !filter(result.original))
     .map((result) => ({ ...result, disabled: disable(result.original) }));
   $: resultsId = results.map((result) => extract(result.original)).join("");

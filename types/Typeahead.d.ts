@@ -64,6 +64,12 @@ export interface TypeaheadProps extends SearchProps {
    * @default false
    */
   focusAfterSelect?: boolean;
+
+  /**
+   * Specify the maximum number of results to return
+   * @default Infinity
+   */
+  limit?: number;
 }
 
 export default class Typeahead extends SvelteComponentTyped<
