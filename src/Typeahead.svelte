@@ -102,7 +102,12 @@
 
 <svelte:window
   on:click={({ target }) => {
-    if (!hideDropdown && results.length > 0 && comboboxRef && !comboboxRef.contains(target)) {
+    if (
+      !hideDropdown &&
+      results.length > 0 &&
+      comboboxRef &&
+      !comboboxRef.contains(target)
+    ) {
       hideDropdown = true;
     }
   }}
@@ -141,26 +146,26 @@
     on:keydown
     on:keydown={(e) => {
       switch (e.key) {
-        case 'Enter':
+        case "Enter":
           select();
           break;
-        case 'ArrowDown':
+        case "ArrowDown":
           e.preventDefault();
           selectedIndex += 1;
           if (selectedIndex === results.length) {
             selectedIndex = 0;
           }
           break;
-        case 'ArrowUp':
+        case "ArrowUp":
           e.preventDefault();
           selectedIndex -= 1;
           if (selectedIndex < 0) {
             selectedIndex = results.length - 1;
           }
           break;
-        case 'Escape':
+        case "Escape":
           e.preventDefault();
-          value = '';
+          value = "";
           searchRef.focus();
           hideDropdown = true;
           break;

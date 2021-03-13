@@ -23,7 +23,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.1.0",
     "svelte": "^3.35.0",
-    "svelte-check": "^1.2.2",
+    "svelte-check": "^1.2.5",
     "svelte-readme": "^3.0.0"
   },
   "repository": {

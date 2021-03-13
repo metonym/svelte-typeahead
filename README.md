@@ -40,7 +40,6 @@ npm i -D svelte-typeahead
 
 Pass an array of objects to the `data` prop. Use the `extractor` to specify the key value to search on.
 
-<!-- prettier-ignore-start -->
 ```svelte
 <script>
   import Typeahead from "svelte-typeahead";
@@ -62,9 +61,7 @@ Pass an array of objects to the `data` prop. Use the `extractor` to specify the 
 </script>
 
 <Typeahead {data} {extract} />
-
 ```
-<!-- prettier-ignore-end -->
 
 ### Custom-styled results
 
@@ -79,7 +76,6 @@ Use a slot to render custom results.
     {index}
   </div>
 </Typeahead>
-
 ```
 
 ### Limit the number of results
@@ -88,7 +84,6 @@ Use the `limit` prop to specify the maximum number of results to display. The de
 
 ```svelte
 <Typeahead limit={2} {data} {extract} />
-
 ```
 
 ### Disable and filter items
@@ -97,41 +92,40 @@ Use the `filter` to filter Items out and `disable` to disable them in the result
 
 Example for disabling and filtering items by their title length:
 
-<!-- prettier-ignore-start -->
 ```svelte
 <script>
-    const disable = (item) => item.state.length > 4;
-    const filter = (item) => item.state.length > 8;
+  const disable = (item) => item.state.length > 4;
+  const filter = (item) => item.state.length > 8;
 </script>
 
 <Typeahead {data} extract={(item) => item.state} {disable} {filter} />
 ```
-<!-- prettier-ignore-end -->
 
 Example for disabling items after selecting them:
 
-<!-- prettier-ignore-start -->
 ```svelte
 <script>
-  function handleSelect(e) {  
+  function handleSelect(e) {
     let i = e.detail.originalIndex;
     data[i].selected = true;
   }
 </script>
 
-<Typeahead {data} extract={(item) => item.state} disable={(item) => item.selected} on:select="{handleSelect}" />
+<Typeahead
+  {data}
+  extract={(item) => item.state}
+  disable={(item) => item.selected}
+  on:select={handleSelect}
+/>
 ```
-<!-- prettier-ignore-end -->
 
 ### Focus after select
 
 Set `focusAfterSelect` to `true` to re-focus the search input after selecting a result.
 
-<!-- prettier-ignore-start -->
 ```svelte
-<Typeahead {data} {extract} focusAfterSelect />
+<Typeahead focusAfterSelect {data} {extract} />
 ```
-<!-- prettier-ignore-end -->
 
 ## API
 
@@ -156,25 +150,24 @@ Set `focusAfterSelect` to `true` to re-focus the search input after selecting a 
 - **on:select**: dispatched when selecting a result
 - **on:clear**: dispatched when clearing the input field
 
-<!-- prettier-ignore-start -->
 ```svelte
 <script>
   let events = [];
 
   function update(event, detail) {
-    events = [...events, JSON.stringify({ event, detail }, null, 2 )];
+    events = [...events, JSON.stringify({ event, detail }, null, 2)];
   }
 </script>
 
 <Typeahead
   {data}
   {extract}
-  on:select="{(e) => {
-    update('select', e.detail);
-  }}"
-  on:clear="{() => {
-    update('clear');
-  }}"
+  on:select={(e) => {
+    update("select", e.detail);
+  }}
+  on:clear={() => {
+    update("clear");
+  }}
 />
 
 <ul>
@@ -185,7 +178,6 @@ Set `focusAfterSelect` to `true` to re-focus the search input after selecting a 
   {/each}
 </ul>
 ```
-<!-- prettier-ignore-end -->
 
 ### Forwarded events
 
@@ -201,7 +193,7 @@ The following events are forwarded to the [svelte-search](https://github.com/met
 
 ## Usage with svite
 
-To use the component with [svite](https://github.com/dominikg/svite), add the following to `vite.config.js`:
+To use this component with [svite](https://github.com/dominikg/svite), add the following to your `vite.config.js`:
 
 ```js
 // vite.config.js
