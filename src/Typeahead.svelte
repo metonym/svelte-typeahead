@@ -121,9 +121,10 @@
   aria-owns="{id}-listbox"
   class:dropdown={results.length > 0}
   aria-expanded={!hideDropdown && results.length > 0}
-  {id}
+  id="{id}-typeahead"
 >
   <Search
+    {id}
     {...$$restProps}
     bind:ref={searchRef}
     aria-autocomplete="list"
@@ -174,15 +175,14 @@
   />
   {#if !hideDropdown && results.length > 0}
     <ul
-      class:svelte-typeahead-list={true}
       role="listbox"
-      aria-labelledby=""
+      aria-labelledby="{id}-label"
       id="{id}-listbox"
     >
       {#each results as result, i}
         <li
           role="option"
-          id="{id}-result"
+          id="{id}-result-{i}"
           class:selected={selectedIndex === i}
           class:disabled={result.disabled}
           aria-selected={selectedIndex === i}
