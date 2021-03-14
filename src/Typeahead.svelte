@@ -175,6 +175,7 @@
   />
   {#if !hideDropdown && results.length > 0}
     <ul
+      class:svelte-typeahead-list={true}
       role="listbox"
       aria-labelledby="{id}-label"
       id="{id}-listbox"
