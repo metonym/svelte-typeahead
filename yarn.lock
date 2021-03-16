@@ -823,10 +823,10 @@ svelte-readme@^3.0.0:
     rollup-plugin-svelte "^7.0.0"
     rollup-plugin-terser "^7.0.2"
 
-svelte-search@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/svelte-search/-/svelte-search-1.0.0.tgz#f166f55b65102fcffcec836f6ff5eab93e30ebef"
-  integrity sha512-r09Q/CZ2xBfGJYYzD4OePOnFDqBD4pWMjfnMh9UnVwXYPWO5UWqP12WoqOpIqOC9n9vxyMa1PKDTQcOkZh2ufQ==
+svelte-search@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/svelte-search/-/svelte-search-1.1.0.tgz#c41cc089a6a15d40911912d7ce497e6ae49d2150"
+  integrity sha512-e5hci9fZPMXb3fuRZvcYJGqh448M8vV3biY4lN4Nr9fqrG/HBnTjWYstKb399aUe9tsBxRbxRAWgtKicisL23g==
 
 svelte@^3.35.0:
   version "3.35.0"
