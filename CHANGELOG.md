@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0](https://github.com/metonym/svelte-typeahead/releases/tag/v3.0.0) - 2021-03-16
+
+**Breaking Changes**
+
+- the `ul` element is rendered even without results to preserve the accessibility label
+
+**Fixes**
+
+- disable form ARIA attributes in `svelte-search`
+- pass the correct `aria-activedescendant` item to `svelte-search`
+
 ## [2.4.1](https://github.com/metonym/svelte-typeahead/releases/tag/v2.4.1) - 2021-03-14
 
 **Fixes**

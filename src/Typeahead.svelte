@@ -131,7 +131,11 @@
     aria-autocomplete="list"
     aria-controls="{id}-listbox"
     aria-labelledby="{id}-label"
-    aria-activedescendant={selectedIndex >= 0 && !hideDropdown && results.length > 0 ? `${id}-result-${selectedIndex}` : null}
+    aria-activedescendant={selectedIndex >= 0 &&
+    !hideDropdown &&
+    results.length > 0
+      ? `${id}-result-${selectedIndex}`
+      : null}
     bind:value
     on:type
     on:input
@@ -175,11 +179,11 @@
     }}
   />
   <ul
-      class:svelte-typeahead-list={true}
-      role="listbox"
-      aria-labelledby="{id}-label"
-      id="{id}-listbox"
-    >
+    class:svelte-typeahead-list={true}
+    role="listbox"
+    aria-labelledby="{id}-label"
+    id="{id}-listbox"
+  >
     {#if !hideDropdown && results.length > 0}
       {#each results as result, i}
         <li
