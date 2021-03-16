@@ -131,7 +131,7 @@
     aria-autocomplete="list"
     aria-controls="{id}-listbox"
     aria-labelledby="{id}-label"
-    aria-activedescendant={selectedIndex >= 0 && !hideDropdown ? `${id}-result-${selectedIndex}` : null}
+    aria-activedescendant={selectedIndex >= 0 && !hideDropdown && results.length > 0 ? `${id}-result-${selectedIndex}` : null}
     bind:value
     on:type
     on:input
