@@ -9,7 +9,8 @@ export default () => {
     return svelteReadme({
       plugins: [commonjs()],
       style: `
-        .code-fence li + li { margin: 0 }
+        .code-fence li + li { margin: 0; }
+        .code-fence { min-height: 16rem; }
       `,
     });
   }
