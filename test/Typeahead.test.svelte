@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Typeahead from "./types";
+  import Typeahead from "../types";
 
   let results = [];
 
@@ -36,7 +36,7 @@
   {disable}
   {filter}
   limit={1}
-  autocapitalize={false + ''}
+  autocapitalize={false + ""}
   placeholder="#{4}"
   autofocus
   hideLabel
@@ -45,7 +45,7 @@
   debounce={800}
   {data}
   on:select={(e) => {
-    console.log('select', e.detail);
+    console.log("select", e.detail);
   }}
   on:clear
   on:type={(e) => {
