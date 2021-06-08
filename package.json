@@ -14,16 +14,16 @@
     "predeploy": "rollup -c",
     "deploy": "npx gh-pages -d dist",
     "prepack": "BUNDLE=true rollup -c",
-    "test": "svelte-check"
+    "test": "svelte-check --workspace=test"
   },
   "dependencies": {
     "fuzzy": "0.1.3",
     "svelte-search": "^1.1.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^18.0.0",
-    "svelte": "^3.35.0",
-    "svelte-check": "^1.3.0",
+    "@rollup/plugin-commonjs": "^19.0.0",
+    "svelte": "^3.38.2",
+    "svelte-check": "^2.1.0",
     "svelte-readme": "^3.1.0"
   },
   "repository": {
