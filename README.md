@@ -14,17 +14,41 @@ Try it in the [Svelte REPL](https://svelte.dev/repl/a1b828d80de24f7e995b2365782c
 
 <!-- TOC -->
 
-## Install
+## Installation
+
+**Yarn**
 
 ```bash
 yarn add -D svelte-typeahead
-# OR
+```
+
+**NPM**
+
+```bash
 npm i -D svelte-typeahead
 ```
 
 ## Usage
 
-[svelte-search](https://github.com/metonym/svelte-search) is used as the underlying search input component. `$$restProps` are forwarded to `svelte-search`.
+### SvelteKit set-up
+
+To use this component with [SvelteKit](https://github.com/sveltejs/kit) or vite-powered set-ups, instruct `vite` to optimize `"fuzzy"` in your configuration.
+
+```js
+// svelte.config.js
+const config = {
+  kit: {
+    target: "#svelte",
+    vite: {
+      optimizeDeps: {
+        include: ["fuzzy"],
+      },
+    },
+  },
+};
+
+export default config;
+```
 
 ### Styling
 
@@ -155,28 +179,20 @@ Set `focusAfterSelect` to `true` to re-focus the search input after selecting a 
   let events = [];
 
   function update(event, detail) {
-    events = [...events, JSON.stringify({ event, detail }, null, 2)];
+    events = [...events, { event, detail }];
   }
 </script>
 
 <Typeahead
   {data}
   {extract}
-  on:select={(e) => {
-    update("select", e.detail);
-  }}
-  on:clear={() => {
-    update("clear");
-  }}
+  on:select={(e) => update("select", e.detail)}
+  on:clear={() => update("clear")}
 />
 
-<ul>
-  {#each events as event}
-    <li>
-      <pre>{event}</pre>
-    </li>
-  {/each}
-</ul>
+{#each events as event}
+  <pre>{JSON.stringify(event, null, 2)}</pre>
+{/each}
 ```
 
 ### Forwarded events
@@ -191,22 +207,11 @@ The following events are forwarded to the [svelte-search](https://github.com/met
 - on:blur
 - on:keydown
 
-## Usage with svite
-
-To use this component with [svite](https://github.com/dominikg/svite), add the following to your `vite.config.js`:
-
-```js
-// vite.config.js
-module.exports = {
-  optimizeDeps: {
-    include: ["fuzzy"],
-  },
-};
-```
-
 ## TypeScript
 
-Svelte version 3.31 or greater is required if using TypeScript.
+Svelte version 3.31 or greater is required to use this component with TypeScript.
+
+TypeScript definitions are located in the [types folder](./types).
 
 ## Changelog
 
