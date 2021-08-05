@@ -14,11 +14,17 @@ Try it in the [Svelte REPL](https://svelte.dev/repl/a1b828d80de24f7e995b2365782c
 
 <!-- TOC -->
 
-## Install
+## Installation
+
+**Yarn**
 
 ```bash
 yarn add -D svelte-typeahead
-# OR
+```
+
+**NPM**
+
+```bash
 npm i -D svelte-typeahead
 ```
 
@@ -162,12 +168,8 @@ Set `focusAfterSelect` to `true` to re-focus the search input after selecting a 
 <Typeahead
   {data}
   {extract}
-  on:select={(e) => {
-    update("select", e.detail);
-  }}
-  on:clear={() => {
-    update("clear");
-  }}
+  on:select={(e) => update("select", e.detail)}
+  on:clear={() => update("clear")}
 />
 
 <ul>
@@ -206,7 +208,9 @@ module.exports = {
 
 ## TypeScript
 
-Svelte version 3.31 or greater is required if using TypeScript.
+Svelte version 3.31 or greater is required to use this component with TypeScript.
+
+TypeScript definitions are located in the [types folder](./types).
 
 ## Changelog
 
