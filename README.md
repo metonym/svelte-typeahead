@@ -30,7 +30,25 @@ npm i -D svelte-typeahead
 
 ## Usage
 
-[svelte-search](https://github.com/metonym/svelte-search) is used as the underlying search input component. `$$restProps` are forwarded to `svelte-search`.
+### SvelteKit set-up
+
+To use this component with [SvelteKit](https://github.com/sveltejs/kit) or vite-powered set-ups, instruct `vite` to optimize `"fuzzy"` in your configuration.
+
+```js
+// svelte.config.js
+const config = {
+  kit: {
+    target: "#svelte",
+    vite: {
+      optimizeDeps: {
+        include: ["fuzzy"],
+      },
+    },
+  },
+};
+
+export default config;
+```
 
 ### Styling
 
@@ -161,7 +179,7 @@ Set `focusAfterSelect` to `true` to re-focus the search input after selecting a 
   let events = [];
 
   function update(event, detail) {
-    events = [...events, JSON.stringify({ event, detail }, null, 2)];
+    events = [...events, { event, detail }];
   }
 </script>
 
@@ -172,13 +190,9 @@ Set `focusAfterSelect` to `true` to re-focus the search input after selecting a 
   on:clear={() => update("clear")}
 />
 
-<ul>
-  {#each events as event}
-    <li>
-      <pre>{event}</pre>
-    </li>
-  {/each}
-</ul>
+{#each events as event}
+  <pre>{JSON.stringify(event, null, 2)}</pre>
+{/each}
 ```
 
 ### Forwarded events
@@ -192,19 +206,6 @@ The following events are forwarded to the [svelte-search](https://github.com/met
 - on:clear
 - on:blur
 - on:keydown
-
-## Usage with svite
-
-To use this component with [svite](https://github.com/dominikg/svite), add the following to your `vite.config.js`:
-
-```js
-// vite.config.js
-module.exports = {
-  optimizeDeps: {
-    include: ["fuzzy"],
-  },
-};
-```
 
 ## TypeScript
 
