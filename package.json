@@ -14,7 +14,7 @@
     "predeploy": "rollup -c",
     "deploy": "npx gh-pages -d dist",
     "prepack": "BUNDLE=true rollup -c",
-    "test": "svelte-check --workspace=test/*"
+    "test": "svelte-check --workspace test"
   },
   "dependencies": {
     "fuzzy": "0.1.3",

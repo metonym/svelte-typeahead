@@ -1,5 +1,6 @@
 <script lang="ts">
   import Typeahead from "../types";
+  import T from "../types/Typeahead.svelte";
 
   let results = [];
 
@@ -31,6 +32,7 @@
   const filter: DisableOrFilter = (item) => item.state.length < 4;
 </script>
 
+<!-- svelte-ignore missing-declaration -->
 <Typeahead
   {extract}
   {disable}
@@ -59,3 +61,6 @@
   {index}
   {result.score}
 </Typeahead>
+
+<!-- svelte-ignore missing-declaration -->
+<T debounce={300} />
