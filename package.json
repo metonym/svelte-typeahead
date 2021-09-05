@@ -22,9 +22,9 @@
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^20.0.0",
-    "svelte": "^3.42.1",
-    "svelte-check": "^2.2.4",
-    "svelte-readme": "^3.2.0"
+    "svelte": "^3.42.4",
+    "svelte-check": "^2.2.5",
+    "svelte-readme": "^3.3.1"
   },
   "repository": {
     "type": "git",
