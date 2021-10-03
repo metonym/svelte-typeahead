@@ -190,9 +190,7 @@ Set `focusAfterSelect` to `true` to re-focus the search input after selecting a 
 <script>
   let events = [];
 
-  function update(event, detail) {
-    events = [...events, { event, detail }];
-  }
+  const update = (event, detail) => (events = [...events, { event, detail }]);
 </script>
 
 <Typeahead
