@@ -60,7 +60,7 @@
       selectedIndex = 0;
     }
 
-    if (prevResults !== resultsId) {
+    if (prevResults !== resultsId && !$$slots["no-results"]) {
       hideDropdown = results.length === 0;
     }
 
@@ -102,12 +102,7 @@
 
 <svelte:window
   on:click={({ target }) => {
-    if (
-      !hideDropdown &&
-      results.length > 0 &&
-      comboboxRef &&
-      !comboboxRef.contains(target)
-    ) {
+    if (!hideDropdown && comboboxRef && !comboboxRef.contains(target)) {
       hideDropdown = true;
     }
   }}
@@ -151,6 +146,8 @@
     on:blur
     on:keydown
     on:keydown={(e) => {
+      if (results.length === 0) return;
+
       switch (e.key) {
         case "Enter":
           select();
@@ -199,11 +196,16 @@
             }
           }}
         >
-          <slot {result} index={i}>
+          <slot {result} index={i} {value}>
             {@html result.string}
           </slot>
         </li>
       {/each}
+    {/if}
+    {#if $$slots["no-results"] && !hideDropdown && value.length > 0 && results.length === 0}
+      <div class:no-results={true}>
+        <slot name="no-results" {value} />
+      </div>
     {/if}
   </ul>
 </div>
@@ -225,8 +227,12 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
-  li {
+  li,
+  .no-results {
     padding: 0.25rem 1rem;
+  }
+
+  li {
     cursor: pointer;
   }
 

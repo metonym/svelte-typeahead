@@ -56,10 +56,15 @@
   bind:results
   let:result
   let:index
+  let:value={searchedValue}
 >
   {@html result.string}
   {index}
   {result.score}
+  {searchedValue}
+  <svelte:fragment slot="no-results" let:value>
+    No results {value}
+  </svelte:fragment>
 </Typeahead>
 
 <!-- svelte-ignore missing-declaration -->
