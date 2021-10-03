@@ -102,6 +102,18 @@ Use a slot to render custom results.
 </Typeahead>
 ```
 
+### No results
+
+Use the "no-results" slot to render a message if the search value does not yield results.
+
+```svelte
+<Typeahead {data} {extract} let:value>
+  <svelte:fragment slot="no-results">
+    No results found for "{value}"
+  </svelte:fragment>
+</Typeahead>
+```
+
 ### Limit the number of results
 
 Use the `limit` prop to specify the maximum number of results to display. The default limit is `Infinity`.

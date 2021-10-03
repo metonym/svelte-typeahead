@@ -94,6 +94,10 @@ export default class Typeahead extends SvelteComponentTyped<
     default: {
       result: FuzzyResult;
       index: number;
+      value: string;
+    };
+    "no-results": {
+      value: string;
     };
   }
 > {}
