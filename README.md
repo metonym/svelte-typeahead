@@ -130,6 +130,8 @@ Example for disabling and filtering items by their title length:
 
 ```svelte
 <script>
+  import Typeahead from "svelte-typeahead";
+
   const disable = (item) => item.state.length > 4;
   const filter = (item) => item.state.length > 8;
 </script>
@@ -140,18 +142,13 @@ Example for disabling and filtering items by their title length:
 Example for disabling items after selecting them:
 
 ```svelte
-<script>
-  function handleSelect(e) {
-    let i = e.detail.originalIndex;
-    data[i].selected = true;
-  }
-</script>
-
 <Typeahead
   {data}
   extract={(item) => item.state}
   disable={(item) => item.selected}
-  on:select={handleSelect}
+  on:select={({ detail }) => {
+    data[detail.originalIndex].selected = true;
+  }}
 />
 ```
 
@@ -188,6 +185,8 @@ Set `focusAfterSelect` to `true` to re-focus the search input after selecting a 
 
 ```svelte
 <script>
+  import Typeahead from "svelte-typeahead";
+
   let events = [];
 
   const update = (event, detail) => (events = [...events, { event, detail }]);
