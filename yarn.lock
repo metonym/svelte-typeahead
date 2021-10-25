@@ -44,10 +44,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@rollup/plugin-commonjs@^21.0.0":
-  version "21.0.0"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-21.0.0.tgz#b9e4342855ea20b5528f4587b9a90f642196a502"
-  integrity sha512-XDQimjHl0kNotAV5lLo34XoygaI0teqiKGJ100B3iCU8+15YscJPeqk2KqkqD3NIe1H8ZTUo5lYjUFZyEgASTw==
+"@rollup/plugin-commonjs@^21.0.1":
+  version "21.0.1"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-21.0.1.tgz#1e57c81ae1518e4df0954d681c642e7d94588fee"
+  integrity sha512-EA+g22lbNJ8p5kuZJUYyhhDK7WgJckW5g4pNN7n4mAFUM96VuwUnNT3xr2Db2iCZPI1pJPbGyfT5mS9T1dHfMg==
   dependencies:
     "@rollup/pluginutils" "^3.1.0"
     commondir "^1.0.1"
@@ -845,10 +845,10 @@ svelte-preprocess@^4.0.0:
     detect-indent "^6.0.0"
     strip-indent "^3.0.0"
 
-svelte-readme@^3.3.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/svelte-readme/-/svelte-readme-3.3.1.tgz#b968c11d5c3eeb0983d1e6aa30b4adc6f4b3d5c0"
-  integrity sha512-lNHP6ZesEt5cW7PQB35uSfGWIiZ33MhUXQWhd1KEP645b0LzIWUSM3Oz2Fp81xngKlvRo4sIHTIeVM1CiJsmfw==
+svelte-readme@^3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/svelte-readme/-/svelte-readme-3.4.1.tgz#99156694c9c50f5592a00cfca1643b5437f9dc9a"
+  integrity sha512-m7Bb3rYgs2ZeuvITwxacLGlXiCKHDDevog8TYW8ixh55hGo/H2wWK/5/8C3Ci9slRgyA9l5pMxfSAjP1heb49w==
   dependencies:
     "@rollup/plugin-node-resolve" "^11.1.0"
     "@rollup/plugin-virtual" "^2.0.3"
@@ -870,10 +870,10 @@ svelte-search@^1.1.0:
   resolved "https://registry.yarnpkg.com/svelte-search/-/svelte-search-1.1.0.tgz#c41cc089a6a15d40911912d7ce497e6ae49d2150"
   integrity sha512-e5hci9fZPMXb3fuRZvcYJGqh448M8vV3biY4lN4Nr9fqrG/HBnTjWYstKb399aUe9tsBxRbxRAWgtKicisL23g==
 
-svelte@^3.43.1:
-  version "3.43.1"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.43.1.tgz#8370c08a970bcc1c118baaa86a38fae82e0a8396"
-  integrity sha512-nvPIaKx4HLzYlSdquISZpgG1Kqr2VAWQjZOt3Iwm3UhbqmA0LnSx4k1YpRMEhjQYW3ZCqQoK8Egto9tv4YewMA==
+svelte@^3.44.0:
+  version "3.44.0"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.44.0.tgz#e6176cb3ad93846ddb4140e93f43098136b23f3b"
+  integrity sha512-zWACSJBSncGiDvFfYOMFGNV5zDLOlyhftmO5yOZ0lEtQMptpElaRtl39MWz1+lYCpwUq4F3Q2lTzI9TrTL+eMA==
 
 terser@^5.0.0:
   version "5.7.1"
