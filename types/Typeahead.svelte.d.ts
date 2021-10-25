@@ -2,16 +2,14 @@
 import { SvelteComponentTyped } from "svelte";
 import { SearchProps } from "svelte-search/types/Search";
 
-export type Item = string | number | Record<string, any>;
-
-export interface FuzzyResult {
-  original: Item;
+export interface FuzzyResult<TItem> {
+  original: TItem;
   index: number;
   score: number;
   string: string;
 }
 
-export interface TypeaheadProps extends SearchProps {
+export interface TypeaheadProps<TItem> extends SearchProps {
   /**
    * @default "typeahead-" + Math.random().toString(36)
    */
@@ -25,22 +23,22 @@ export interface TypeaheadProps extends SearchProps {
   /**
    * @default []
    */
-  data?: Item[];
+  data?: TItem[];
 
   /**
    * @default (item) => item
    */
-  extract?: (item: Item) => Item;
+  extract?: (item: TItem) => any;
 
   /**
    * @default (item) => false
    */
-  disable?: (item: Item) => boolean;
+  disable?: (item: TItem) => boolean;
 
   /**
    * @default (item) => false
    */
-  filter?: (item: Item) => boolean;
+  filter?: (item: TItem) => boolean;
 
   /**
    * Set to `false` to prevent the first result from being selected
@@ -57,7 +55,7 @@ export interface TypeaheadProps extends SearchProps {
   /**
    * @default []
    */
-  results?: FuzzyResult[];
+  results?: FuzzyResult<TItem>[];
 
   /**
    * Set to `true` to re-focus the input after selecting a result
@@ -72,14 +70,14 @@ export interface TypeaheadProps extends SearchProps {
   limit?: number;
 }
 
-export default class Typeahead extends SvelteComponentTyped<
-  TypeaheadProps,
+export default class Typeahead<TItem = string | number | Record<string, any>> extends SvelteComponentTyped<
+  TypeaheadProps<TItem>,
   {
     select: CustomEvent<{
       searched: string;
-      selected: Item;
+      selected: TItem;
       selectedIndex: number;
-      original: Item;
+      original: TItem;
       originalIndex: number;
     }>;
     type: CustomEvent<string>;
@@ -92,7 +90,7 @@ export default class Typeahead extends SvelteComponentTyped<
   },
   {
     default: {
-      result: FuzzyResult;
+      result: FuzzyResult<TItem>;
       index: number;
       value: string;
     };
