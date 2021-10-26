@@ -1,8 +1,9 @@
 <script lang="ts">
   import Typeahead from "../types";
+  import type { TypeaheadProps } from "../types/Typeahead.svelte";
   import T from "../types/Typeahead.svelte";
 
-  let results = [];
+  let results: TypeaheadProps<typeof data[0]>["results"] = [];
 
   const data = [
     { id: 0, state: "California" },
@@ -16,27 +17,13 @@
     { id: 8, state: "New Hampshire" },
     { id: 9, state: "New Jersey" },
   ];
-
-  interface Item {
-    id: number;
-    state: string;
-  }
-
-  type Extract = (item: Item) => string;
-
-  const extract: Extract = (item) => item.state;
-
-  type DisableOrFilter = (item: Item) => boolean;
-
-  const disable: DisableOrFilter = (item) => item.state.length > 10;
-  const filter: DisableOrFilter = (item) => item.state.length < 4;
 </script>
 
 <!-- svelte-ignore missing-declaration -->
 <Typeahead
-  {extract}
-  {disable}
-  {filter}
+  extract={(item) => item.state}
+  disable={(item) => item.state.length > 10}
+  filter={(item) => item.id < 4}
   limit={1}
   autocapitalize={false + ""}
   placeholder="#{4}"
@@ -58,6 +45,7 @@
   let:index
   let:value={searchedValue}
 >
+  {result.original}
   {@html result.string}
   {index}
   {result.score}

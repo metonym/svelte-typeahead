@@ -1,25 +1,21 @@
 <script>
   /**
-   * @typedef {string | number | Record<string, any>} Item
-   * @typedef {{ original: Item; index: number; score: number; string: string; }} FuzzyResult
-   * @event {{ searched: string; selected: Item; selectedIndex: number; original: Item; originalIndex: number; }} select
-   * @event {any} clear
-   * @slot {{ result: FuzzyResult; index: number }}
+   * @template TItem = string | number | Record<string, any>
    */
 
   export let id = "typeahead-" + Math.random().toString(36);
   export let value = "";
 
-  /** @type {Item[]} */
+  /** @type {TItem[]} */
   export let data = [];
 
-  /** @type {(item: Item) => Item} */
+  /** @type {(item: TItem) => any} */
   export let extract = (item) => item;
 
-  /** @type {(item: Item) => Item} */
+  /** @type {(item: TItem) => boolean} */
   export let disable = (item) => false;
 
-  /** @type {(item: Item) => Item} */
+  /** @type {(item: TItem) => boolean} */
   export let filter = (item) => false;
 
   /** Set to `false` to prevent the first result from being selected */
@@ -31,7 +27,7 @@
    */
   export let inputAfterSelect = "update";
 
-  /** @type {FuzzyResult[]} */
+  /** @type {{ original: TItem; index: number; score: number; string: string; }[]} */
   export let results = [];
 
   /** Set to `true` to re-focus the input after selecting a result */
