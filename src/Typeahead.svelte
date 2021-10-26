@@ -28,7 +28,7 @@
    */
   export let inputAfterSelect = "update";
 
-  /** @type {FuzzyResult[]} */
+  /** @type {FuzzyResult<TItem>[]} */
   export let results = [];
 
   /** Set to `true` to re-focus the input after selecting a result */
