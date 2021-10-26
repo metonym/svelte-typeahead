@@ -2,13 +2,6 @@
 import { SvelteComponentTyped } from "svelte";
 import { SearchProps } from "svelte-search/types/Search";
 
-export interface FuzzyResult<TItem> {
-  original: TItem;
-  index: number;
-  score: number;
-  string: string;
-}
-
 export interface TypeaheadProps<TItem> extends SearchProps {
   /**
    * @default "typeahead-" + Math.random().toString(36)
@@ -55,7 +48,12 @@ export interface TypeaheadProps<TItem> extends SearchProps {
   /**
    * @default []
    */
-  results?: FuzzyResult<TItem>[];
+  results?: {
+    original: TItem;
+    index: number;
+    score: number;
+    string: string;
+  }[];
 
   /**
    * Set to `true` to re-focus the input after selecting a result
@@ -70,7 +68,9 @@ export interface TypeaheadProps<TItem> extends SearchProps {
   limit?: number;
 }
 
-export default class Typeahead<TItem = string | number | Record<string, any>> extends SvelteComponentTyped<
+export default class Typeahead<
+  TItem = string | number | Record<string, any>
+> extends SvelteComponentTyped<
   TypeaheadProps<TItem>,
   {
     select: CustomEvent<{
@@ -90,7 +90,12 @@ export default class Typeahead<TItem = string | number | Record<string, any>> ex
   },
   {
     default: {
-      result: FuzzyResult<TItem>;
+      result: {
+        original: TItem;
+        index: number;
+        score: number;
+        string: string;
+      };
       index: number;
       value: string;
     };

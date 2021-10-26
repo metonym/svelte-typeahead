@@ -1,8 +1,9 @@
 <script lang="ts">
   import Typeahead from "../types";
+  import type { TypeaheadProps } from "../types/Typeahead.svelte";
   import T from "../types/Typeahead.svelte";
 
-  let results = [];
+  let results: TypeaheadProps<typeof data[0]>["results"] = [];
 
   const data = [
     { id: 0, state: "California" },
@@ -44,6 +45,7 @@
   let:index
   let:value={searchedValue}
 >
+  {result.original}
   {@html result.string}
   {index}
   {result.score}

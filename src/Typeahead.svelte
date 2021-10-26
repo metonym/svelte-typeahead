@@ -1,7 +1,6 @@
 <script>
   /**
    * @template TItem = string | number | Record<string, any>
-   * @typedef {{ original: TItem; index: number; score: number; string: string; }} FuzzyResult
    */
 
   export let id = "typeahead-" + Math.random().toString(36);
@@ -28,7 +27,7 @@
    */
   export let inputAfterSelect = "update";
 
-  /** @type {FuzzyResult<TItem>[]} */
+  /** @type {{ original: TItem; index: number; score: number; string: string; }[]} */
   export let results = [];
 
   /** Set to `true` to re-focus the input after selecting a result */
