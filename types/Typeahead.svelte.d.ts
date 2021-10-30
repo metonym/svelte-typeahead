@@ -53,6 +53,7 @@ export interface TypeaheadProps<TItem> extends SearchProps {
     index: number;
     score: number;
     string: string;
+    disabled?: boolean;
   }[];
 
   /**

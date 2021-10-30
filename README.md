@@ -28,6 +28,12 @@ yarn add -D svelte-typeahead
 npm i -D svelte-typeahead
 ```
 
+**pnpm**
+
+```bash
+pnpm i -D svelte-typeahead
+```
+
 ## Usage
 
 ### SvelteKit set-up
@@ -62,7 +68,7 @@ export default config;
 
 ### Basic
 
-Pass an array of objects to the `data` prop. Use the `extractor` to specify the key value to search on.
+Pass an array of objects to the `data` prop. Use the `extractor` prop to specify the value to search on.
 
 ```svelte
 <script>
@@ -116,27 +122,25 @@ Use the "no-results" slot to render a message if the search value does not yield
 
 ### Limit the number of results
 
-Use the `limit` prop to specify the maximum number of results to display. The default limit is `Infinity`.
+Use the `limit` prop to specify the maximum number of results to display. The default is `Infinity`.
 
 ```svelte
 <Typeahead limit={2} {data} {extract} />
 ```
 
-### Disable and filter items
+### Disabled items
 
-Use the `filter` to filter Items out and `disable` to disable them in the result set.
+Disable items using the `disable` filter.
 
-Example for disabling and filtering items by their title length:
+In the following example, items with a `state` value containing "Carolina" are disabled. Disabled items are not selectable nor keyboard navigable.
 
 ```svelte
-<script>
-  import Typeahead from "svelte-typeahead";
-
-  const disable = (item) => item.state.length > 4;
-  const filter = (item) => item.state.length > 8;
-</script>
-
-<Typeahead {data} extract={(item) => item.state} {disable} {filter} />
+<Typeahead
+  {data}
+  value="ca"
+  extract={(item) => item.state}
+  disable={(item) => /Carolina/.test(item.state)}
+/>
 ```
 
 Example for disabling items after selecting them:

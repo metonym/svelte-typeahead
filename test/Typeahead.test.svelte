@@ -5,6 +5,8 @@
 
   let results: TypeaheadProps<typeof data[0]>["results"] = [];
 
+  $: console.log(results[0]?.disabled);
+
   const data = [
     { id: 0, state: "California" },
     { id: 1, state: "North Carolina" },

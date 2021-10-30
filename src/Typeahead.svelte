@@ -27,7 +27,7 @@
    */
   export let inputAfterSelect = "update";
 
-  /** @type {{ original: TItem; index: number; score: number; string: string; }[]} */
+  /** @type {{ original: TItem; index: number; score: number; string: string; disabled?: boolean; }[]} */
   export let results = [];
 
   /** Set to `true` to re-focus the input after selecting a result */
@@ -65,6 +65,9 @@
 
   async function select() {
     const result = results[selectedIndex];
+
+    if (result.disabled) return;
+
     const selectedValue = extract(result.original);
     const searchedValue = value;
 
@@ -84,6 +87,27 @@
     if (focusAfterSelect) searchRef.focus();
 
     hideDropdown = true;
+  }
+
+  /** @type {(direction: -1 | 1) => void} */
+  function change(direction) {
+    let index =
+      selectedIndex === results.length - 1 ? 0 : selectedIndex + direction;
+    if (index < 0) index = results.length - 1;
+
+    let disabled = results[index].disabled;
+
+    while (disabled) {
+      if (index === results.length) {
+        index = 0;
+      } else {
+        index += direction;
+      }
+
+      disabled = results[index].disabled;
+    }
+
+    selectedIndex = index;
   }
 
   $: options = { pre: "<mark>", post: "</mark>", extract };
@@ -150,17 +174,11 @@
           break;
         case "ArrowDown":
           e.preventDefault();
-          selectedIndex += 1;
-          if (selectedIndex === results.length) {
-            selectedIndex = 0;
-          }
+          change(1);
           break;
         case "ArrowUp":
           e.preventDefault();
-          selectedIndex -= 1;
-          if (selectedIndex < 0) {
-            selectedIndex = results.length - 1;
-          }
+          change(-1);
           break;
         case "Escape":
           e.preventDefault();
