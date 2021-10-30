@@ -28,6 +28,12 @@ yarn add -D svelte-typeahead
 npm i -D svelte-typeahead
 ```
 
+**pnpm**
+
+```bash
+pnpm i -D svelte-typeahead
+```
+
 ## Usage
 
 ### SvelteKit set-up
