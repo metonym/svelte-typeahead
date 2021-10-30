@@ -65,6 +65,9 @@
 
   async function select() {
     const result = results[selectedIndex];
+
+    if (result.disabled) return;
+
     const selectedValue = extract(result.original);
     const searchedValue = value;
 
