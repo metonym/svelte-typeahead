@@ -75,16 +75,16 @@ Pass an array of objects to the `data` prop. Use the `extractor` prop to specify
   import Typeahead from "svelte-typeahead";
 
   const data = [
-    { id: 0, state: "California" },
-    { id: 1, state: "North Carolina" },
-    { id: 2, state: "North Dakota" },
-    { id: 3, state: "South Carolina" },
-    { id: 4, state: "South Dakota" },
-    { id: 5, state: "Michigan" },
-    { id: 6, state: "Tennessee" },
-    { id: 7, state: "Nevada" },
-    { id: 8, state: "New Hampshire" },
-    { id: 9, state: "New Jersey" },
+    { state: "California" },
+    { state: "North Carolina" },
+    { state: "North Dakota" },
+    { state: "South Carolina" },
+    { state: "South Dakota" },
+    { state: "Michigan" },
+    { state: "Tennessee" },
+    { state: "Nevada" },
+    { state: "New Hampshire" },
+    { state: "New Jersey" },
   ];
 
   const extract = (item) => item.state;
@@ -95,9 +95,9 @@ Pass an array of objects to the `data` prop. Use the `extractor` prop to specify
 
 ### Custom-styled results
 
-By default, this component uses the `fuzzy` library to highlight matching characters with the `mark` element.
+This component uses the `fuzzy` library to highlight matching characters with the `mark` element.
 
-Use a slot to render custom results.
+Override the default slot to render custom results.
 
 ```svelte
 <Typeahead {data} {extract} let:result let:index>
@@ -161,7 +161,7 @@ Set `focusAfterSelect` to `true` to re-focus the search input after selecting a 
 | data             | `T[]` (default: `[]`)                               | Items to search                                                                                                                    |
 | extract          | `(T) => T`                                          | Target an item key if `data` is an object array                                                                                    |
 | disable          | `(T) => T`                                          | Pass in a function to disable items. They will show up in the results list, but wont be selectable.                                |
-| filter           | `(T) => T`                                          | Pass in a function to filter items. Thei will be hidden and do not show up at all in the results list.                             |
+| filter           | `(T) => T`                                          | Pass in a function to filter items. They will be hidden and do not show up at all in the results list.                             |
 | autoselect       | `boolean` (default: `true`)                         | Automatically select the first (top) result                                                                                        |
 | inputAfterSelect | `"update" or "clear" or "keep"`(default:`"update"`) | Set to `"clear"` to clear the `value` after selecting a result. Set to `"keep"` keep the search field unchanged after a selection. |
 | results          | `FuzzyResult[]` (default: `[]`)                     | Raw fuzzy results from the [fuzzy](https://github.com/mattyork/fuzzy) module                                                       |
