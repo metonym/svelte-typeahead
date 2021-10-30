@@ -143,19 +143,6 @@ In the following example, items with a `state` value containing "Carolina" are d
 />
 ```
 
-Example for disabling items after selecting them:
-
-```svelte
-<Typeahead
-  {data}
-  extract={(item) => item.state}
-  disable={(item) => item.selected}
-  on:select={({ detail }) => {
-    data[detail.originalIndex].selected = true;
-  }}
-/>
-```
-
 ### Focus after select
 
 Set `focusAfterSelect` to `true` to re-focus the search input after selecting a result.
