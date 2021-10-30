@@ -27,7 +27,7 @@
    */
   export let inputAfterSelect = "update";
 
-  /** @type {{ original: TItem; index: number; score: number; string: string; }[]} */
+  /** @type {{ original: TItem; index: number; score: number; string: string; disabled?: boolean; }[]} */
   export let results = [];
 
   /** Set to `true` to re-focus the input after selecting a result */
