@@ -89,6 +89,27 @@
     hideDropdown = true;
   }
 
+  /** @type {(direction: -1 | 1) => void} */
+  function change(direction) {
+    let index =
+      selectedIndex === results.length - 1 ? 0 : selectedIndex + direction;
+    if (index < 0) index = results.length - 1;
+
+    let disabled = results[index].disabled;
+
+    while (disabled) {
+      if (index === results.length) {
+        index = 0;
+      } else {
+        index += direction;
+      }
+
+      disabled = results[index].disabled;
+    }
+
+    selectedIndex = index;
+  }
+
   $: options = { pre: "<mark>", post: "</mark>", extract };
   $: results = fuzzy
     .filter(value, data, options)
@@ -153,17 +174,11 @@
           break;
         case "ArrowDown":
           e.preventDefault();
-          selectedIndex += 1;
-          if (selectedIndex === results.length) {
-            selectedIndex = 0;
-          }
+          change(1);
           break;
         case "ArrowUp":
           e.preventDefault();
-          selectedIndex -= 1;
-          if (selectedIndex < 0) {
-            selectedIndex = results.length - 1;
-          }
+          change(-1);
           break;
         case "Escape":
           e.preventDefault();

@@ -122,21 +122,20 @@ Use the `limit` prop to specify the maximum number of results to display. The de
 <Typeahead limit={2} {data} {extract} />
 ```
 
-### Disable and filter items
+### Disabled items
 
-Use the `filter` to filter Items out and `disable` to disable them in the result set.
+Disable items using the `disable` filter.
 
-Example for disabling and filtering items by their title length:
+In the following example, items with a `state` value containing "Carolina" are disabled. Disabled items are not selectable nor keyboard navigable.
 
 ```svelte
 <script>
   import Typeahead from "svelte-typeahead";
 
-  const disable = (item) => item.state.length > 4;
-  const filter = (item) => item.state.length > 8;
+  const disable = (item) => /Carolina/.test(item.state);
 </script>
 
-<Typeahead {data} extract={(item) => item.state} {disable} {filter} />
+<Typeahead value="ca" {data} {extract} {disable} />
 ```
 
 Example for disabling items after selecting them:
