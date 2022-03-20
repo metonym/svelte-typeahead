@@ -44,7 +44,6 @@ To use this component with [SvelteKit](https://github.com/sveltejs/kit) or vite-
 // svelte.config.js
 const config = {
   kit: {
-    target: "#svelte",
     vite: {
       optimizeDeps: {
         include: ["fuzzy"],
