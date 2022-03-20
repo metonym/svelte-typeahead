@@ -21,10 +21,10 @@
     "svelte-search": "^1.1.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^21.0.1",
-    "svelte": "^3.44.0",
-    "svelte-check": "^2.2.6",
-    "svelte-readme": "^3.4.1"
+    "@rollup/plugin-commonjs": "^21.0.2",
+    "svelte": "^3.46.4",
+    "svelte-check": "^2.4.6",
+    "svelte-readme": "^3.6.3"
   },
   "repository": {
     "type": "git",
