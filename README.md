@@ -185,9 +185,7 @@ Set `focusAfterSelect` to `true` to re-focus the search input after selecting a 
   on:clear={() => (e = [...e, { event: "clear" }])}
 />
 
-<pre>
-  {JSON.stringify(e, null, 2)}
-</pre>
+<pre>{JSON.stringify(e, null, 2)}</pre>
 ```
 
 ### Forwarded events
