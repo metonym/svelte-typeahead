@@ -209,6 +209,10 @@
               select();
             }
           }}
+          on:mouseenter={() => {
+            if (result.disabled) return;
+            selectedIndex = i;
+          }}
         >
           <slot {result} index={i} {value}>
             {@html result.string}
