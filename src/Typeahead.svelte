@@ -92,7 +92,9 @@
   /** @type {(direction: -1 | 1) => void} */
   function change(direction) {
     let index =
-      direction === 1 && selectedIndex === results.length - 1 ? 0 : selectedIndex + direction;
+      direction === 1 && selectedIndex === results.length - 1
+        ? 0
+        : selectedIndex + direction;
     if (index < 0) index = results.length - 1;
 
     let disabled = results[index].disabled;
