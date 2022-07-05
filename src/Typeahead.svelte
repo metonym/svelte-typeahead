@@ -198,24 +198,24 @@
     id="{id}-listbox"
   >
     {#if !hideDropdown && results.length > 0}
-      {#each results as result, i}
+      {#each results as result, index}
         <li
           role="option"
-          id="{id}-result-{i}"
-          class:selected={selectedIndex === i}
+          id="{id}-result-{index}"
+          class:selected={selectedIndex === index}
           class:disabled={result.disabled}
-          aria-selected={selectedIndex === i}
+          aria-selected={selectedIndex === index}
           on:click={() => {
             if (result.disabled) return;
-            selectedIndex = i;
+            selectedIndex = index;
             select();
           }}
           on:mouseenter={() => {
             if (result.disabled) return;
-            selectedIndex = i;
+            selectedIndex = index;
           }}
         >
-          <slot {result} index={i} {value}>
+          <slot {result} {index} {value}>
             {@html result.string}
           </slot>
         </li>
