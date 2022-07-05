@@ -120,6 +120,7 @@
     .filter((result) => !filter(result.original))
     .map((result) => ({ ...result, disabled: disable(result.original) }));
   $: resultsId = results.map((result) => extract(result.original)).join("");
+  $: showResults = !hideDropdown && results.length > 0;
 </script>
 
 <svelte:window
@@ -137,7 +138,7 @@
   aria-haspopup="listbox"
   aria-owns="{id}-listbox"
   class:dropdown={results.length > 0}
-  aria-expanded={!hideDropdown && results.length > 0}
+  aria-expanded={showResults}
   id="{id}-typeahead"
 >
   <Search
@@ -197,7 +198,7 @@
     aria-labelledby="{id}-label"
     id="{id}-listbox"
   >
-    {#if !hideDropdown && results.length > 0}
+    {#if showResults}
       {#each results as result, index}
         <li
           role="option"
@@ -244,6 +245,10 @@
     list-style: none;
     background-color: inherit;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  [aria-expanded="true"] ul {
+    z-index: 1;
   }
 
   li,
