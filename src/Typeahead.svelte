@@ -206,10 +206,9 @@
           class:disabled={result.disabled}
           aria-selected={selectedIndex === i}
           on:click={() => {
-            if (!result.disabled) {
-              selectedIndex = i;
-              select();
-            }
+            if (result.disabled) return;
+            selectedIndex = i;
+            select();
           }}
           on:mouseenter={() => {
             if (result.disabled) return;
