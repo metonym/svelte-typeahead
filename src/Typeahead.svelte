@@ -85,8 +85,7 @@
     await tick();
 
     if (focusAfterSelect) searchRef.focus();
-
-    hideDropdown = true;
+    close();
   }
 
   /** @type {(direction: -1 | 1) => void} */
@@ -112,6 +111,9 @@
     selectedIndex = index;
   }
 
+  const open = () => (hideDropdown = false);
+  const close = () => (hideDropdown = true);
+
   $: options = { pre: "<mark>", post: "</mark>", extract };
   $: results = fuzzy
     .filter(value, data, options)
@@ -126,7 +128,7 @@
 <svelte:window
   on:click={({ target }) => {
     if (!hideDropdown && comboboxRef && !comboboxRef.contains(target)) {
-      hideDropdown = true;
+      close();
     }
   }}
 />
@@ -159,13 +161,9 @@
     on:input
     on:change
     on:focus
-    on:focus={() => {
-      hideDropdown = false;
-    }}
+    on:focus={open}
     on:clear
-    on:clear={() => {
-      hideDropdown = false;
-    }}
+    on:clear={open}
     on:blur
     on:keydown
     on:keydown={(e) => {
@@ -187,7 +185,7 @@
           e.preventDefault();
           value = "";
           searchRef.focus();
-          hideDropdown = true;
+          close();
           break;
       }
     }}
