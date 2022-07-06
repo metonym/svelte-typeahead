@@ -127,7 +127,7 @@
 
 <svelte:window
   on:click={({ target }) => {
-    if (!hideDropdown && comboboxRef && !comboboxRef.contains(target)) {
+    if (!hideDropdown && !comboboxRef?.contains(target)) {
       close();
     }
   }}
@@ -184,7 +184,7 @@
         case "Escape":
           e.preventDefault();
           value = "";
-          searchRef.focus();
+          searchRef?.focus();
           close();
           break;
       }
