@@ -16,21 +16,14 @@ Try it in the [Svelte REPL](https://svelte.dev/repl/a1b828d80de24f7e995b2365782c
 
 ## Installation
 
-**Yarn**
-
 ```bash
+# Yarn
 yarn add -D svelte-typeahead
-```
 
-**NPM**
-
-```bash
+# npm
 npm i -D svelte-typeahead
-```
 
-**pnpm**
-
-```bash
+# pnpm
 pnpm i -D svelte-typeahead
 ```
 
@@ -38,7 +31,7 @@ pnpm i -D svelte-typeahead
 
 ### SvelteKit set-up
 
-To use this component with [SvelteKit](https://github.com/sveltejs/kit) or vite-powered set-ups, instruct `vite` to optimize `"fuzzy"` in your configuration.
+To use this component with [SvelteKit](https://github.com/sveltejs/kit) or vite-powered set-ups, instruct `vite` to optimize the `"fuzzy"` dependency.
 
 ```js
 // svelte.config.js
@@ -92,16 +85,14 @@ Pass an array of objects to the `data` prop. Use the `extractor` prop to specify
 
 ### Custom-styled results
 
-This component uses the `fuzzy` library to highlight matching characters with the `mark` element.
+This component uses the [fuzzy](https://github.com/mattyork/fuzzy) library to highlight matching characters with the [mark](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark) element.
 
-Override the default slot to render custom results.
+Use the default slot to render custom results.
 
 ```svelte
 <Typeahead {data} {extract} let:result let:index>
-  <div style="color: red; font-weight: bold;">
-    {@html result.string}
-    {index}
-  </div>
+  <strong>{@html result.string}</strong>
+  {index}
 </Typeahead>
 ```
 
@@ -127,9 +118,9 @@ Use the `limit` prop to specify the maximum number of results to display. The de
 
 ### Disabled items
 
-Disable items using the `disable` filter.
+Disable items using the `disable` filter. Disabled items are not selectable or navigable by keyboard.
 
-In the following example, items with a `state` value containing "Carolina" are disabled. Disabled items are not selectable nor keyboard navigable.
+In the following example, items with a `state` value containing "Carolina" are disabled.
 
 ```svelte
 <Typeahead
