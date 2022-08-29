@@ -63,6 +63,12 @@ export interface TypeaheadProps<TItem> extends SearchProps {
   focusAfterSelect?: boolean;
 
   /**
+   * Set to `true` to only show results when the input is focused
+   * @default false
+   */
+  showDropdownOnFocus?: boolean;
+
+  /**
    * Specify the maximum number of results to return
    * @default Infinity
    */
