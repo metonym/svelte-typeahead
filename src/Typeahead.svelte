@@ -33,6 +33,9 @@
   /** Set to `true` to re-focus the input after selecting a result */
   export let focusAfterSelect = false;
 
+  /** Set to `true` to only show results when the input is focused */
+  export let showDropdownOnFocus = false;
+
   /**
    * Specify the maximum number of results to return
    * @type {number}
@@ -50,6 +53,7 @@
   let hideDropdown = false;
   let selectedIndex = -1;
   let prevResults = "";
+  let isFocused = false;
 
   afterUpdate(() => {
     if (prevResults !== resultsId && autoselect) {
@@ -123,6 +127,9 @@
     .map((result) => ({ ...result, disabled: disable(result.original) }));
   $: resultsId = results.map((result) => extract(result.original)).join("");
   $: showResults = !hideDropdown && results.length > 0;
+  $: if (showDropdownOnFocus) {
+    showResults = showResults && isFocused;
+  }
 </script>
 
 <svelte:window
@@ -161,10 +168,16 @@
     on:input
     on:change
     on:focus
-    on:focus={open}
+    on:focus={() => {
+      open();
+      isFocused = true;
+    }}
     on:clear
     on:clear={open}
     on:blur
+    on:blur={() => {
+      isFocused = false;
+    }}
     on:keydown
     on:keydown={(e) => {
       if (results.length === 0) return;
