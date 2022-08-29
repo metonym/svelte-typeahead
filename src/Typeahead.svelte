@@ -57,7 +57,7 @@
 
   afterUpdate(() => {
     if (prevResults !== resultsId && autoselect) {
-      selectedIndex = 0;
+      selectedIndex = getNextNonDisabledIndex();
     }
 
     if (prevResults !== resultsId && !$$slots["no-results"]) {
@@ -90,6 +90,24 @@
 
     if (focusAfterSelect) searchRef.focus();
     close();
+  }
+
+  /** @type {() => number} */
+  function getNextNonDisabledIndex() {
+    let index = 0;
+    let disabled = results[index]?.disabled ?? false;
+
+    while (disabled) {
+      if (index === results.length) {
+        index = 0;
+      } else {
+        index += 1;
+      }
+
+      disabled = results[index]?.disabled ?? false;
+    }
+
+    return index;
   }
 
   /** @type {(direction: -1 | 1) => void} */
