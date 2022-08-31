@@ -83,6 +83,26 @@ Pass an array of objects to the `data` prop. Use the `extractor` prop to specify
 <Typeahead {data} {extract} />
 ```
 
+### Custom label
+
+`$$restProps` are forwarded to [svelte-search](https://github.com/metonym/svelte-search).
+
+Use the `label` prop to specify a custom label.
+
+```svelte
+<Typeahead label="U.S. States" {data} {extract} />
+```
+
+### Hidden label
+
+Set `hideLabel` to `true` to visually hide the label.
+
+It's recommended that you set the `label` – even if hidden – for accessibility.
+
+```svelte
+<Typeahead label="U.S. States" hideLabel {data} {extract} />
+```
+
 ### Custom-styled results
 
 This component uses the [fuzzy](https://github.com/mattyork/fuzzy) library to highlight matching characters with the [mark](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark) element.
