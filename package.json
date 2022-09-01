@@ -10,8 +10,6 @@
   "types": "./types/index.d.ts",
   "scripts": {
     "dev": "rollup -cw",
-    "predeploy": "rollup -c",
-    "deploy": "npx gh-pages -d dist",
     "prepack": "BUNDLE=true rollup -c",
     "test": "svelte-check --workspace test"
   },
