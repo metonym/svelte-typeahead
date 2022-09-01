@@ -188,14 +188,14 @@
     on:focus
     on:focus={() => {
       open();
-      isFocused = true;
+      if (showDropdownOnFocus) {
+        showResults = true;
+        isFocused = true;
+      }
     }}
     on:clear
     on:clear={open}
     on:blur
-    on:blur={() => {
-      isFocused = false;
-    }}
     on:keydown
     on:keydown={(e) => {
       if (results.length === 0) return;
