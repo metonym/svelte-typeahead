@@ -34,6 +34,7 @@
   focusAfterSelect
   inputAfterSelect="keep"
   debounce={800}
+  showAllResultsOnFocus
   {data}
   on:select={(e) => {
     console.log("select", e.detail);

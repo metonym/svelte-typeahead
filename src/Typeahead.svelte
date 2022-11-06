@@ -36,6 +36,9 @@
   /** Set to `true` to only show results when the input is focused */
   export let showDropdownOnFocus = false;
 
+  /** Set to `true` for all results to be shown when an empty input is focused */
+  export let showAllResultsOnFocus = false;
+
   /**
    * Specify the maximum number of results to return
    * @type {number}
@@ -134,7 +137,10 @@
   }
 
   const open = () => (hideDropdown = false);
-  const close = () => (hideDropdown = true);
+  const close = () => {
+    hideDropdown = true;
+    isFocused = false;
+  };
 
   $: options = { pre: "<mark>", post: "</mark>", extract };
   $: results = fuzzy
@@ -147,6 +153,17 @@
   $: showResults = !hideDropdown && results.length > 0;
   $: if (showDropdownOnFocus) {
     showResults = showResults && isFocused;
+  }
+  $: if (isFocused && showAllResultsOnFocus && value.length === 0) {
+    results = data
+      .filter((datum) => !filter(datum))
+      .map((original, index) => ({
+        disabled: disable(original),
+        index,
+        original,
+        score: 0,
+        string: extract(original),
+      }));
   }
 </script>
 
@@ -188,7 +205,7 @@
     on:focus
     on:focus={() => {
       open();
-      if (showDropdownOnFocus) {
+      if (showDropdownOnFocus || showAllResultsOnFocus) {
         showResults = true;
         isFocused = true;
       }
