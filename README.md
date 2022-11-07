@@ -29,16 +29,6 @@ pnpm i -D svelte-typeahead
 
 ## Usage
 
-### Styling
-
-**Note:** this component is minimally styled by design. You can target the component using the `[data-svelte-typeahead]` selector.
-
-```css
-:global([data-svelte-typeahead]) {
-  margin: 1rem;
-}
-```
-
 ### Basic
 
 Pass an array of objects to the `data` prop. Use the `extractor` prop to specify the value to search on.
@@ -160,6 +150,16 @@ Set `showAllResultsOnFocus` to `true` for all results to be shown when an empty 
 
 ```svelte
 <Typeahead showAllResultsOnFocus {data} {extract} />
+```
+
+### Styling
+
+**Note:** this component is minimally styled by design. You can target the component using the `[data-svelte-typeahead]` selector.
+
+```css
+:global([data-svelte-typeahead]) {
+  margin: 1rem;
+}
 ```
 
 ## API
