@@ -31,7 +31,7 @@ pnpm i -D svelte-typeahead
 
 ### Basic
 
-Pass an array of objects to the `data` prop. Use the `extractor` prop to specify the value to search on.
+Pass an array of objects to the `data` prop. Use the `extract` prop to specify the value to search on.
 
 ```svelte
 <script>
