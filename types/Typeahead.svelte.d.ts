@@ -94,7 +94,7 @@ export default class Typeahead<
       originalIndex: number;
     }>;
     type: CustomEvent<string>;
-    clear: CustomEvent<any>;
+    clear: CustomEvent<null>;
     input: WindowEventMap["input"];
     change: WindowEventMap["change"];
     focus: WindowEventMap["focus"];
