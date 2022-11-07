@@ -29,33 +29,6 @@ pnpm i -D svelte-typeahead
 
 ## Usage
 
-### SvelteKit set-up
-
-To use this component with [SvelteKit](https://github.com/sveltejs/kit) or vite-powered set-ups, instruct `vite` to optimize the `"fuzzy"` dependency.
-
-```js
-// svelte.config.js
-const config = {
-  kit: {
-    vite: {
-      optimizeDeps: {
-        include: ["fuzzy"],
-      },
-    },
-  },
-};
-```
-
-### Styling
-
-**Note:** this component is minimally styled by design. You can target the component using the `[data-svelte-typeahead]` selector.
-
-```css
-:global([data-svelte-typeahead]) {
-  margin: 1rem;
-}
-```
-
 ### Basic
 
 Pass an array of objects to the `data` prop. Use the `extractor` prop to specify the value to search on.
@@ -179,25 +152,35 @@ Set `showAllResultsOnFocus` to `true` for all results to be shown when an empty 
 <Typeahead showAllResultsOnFocus {data} {extract} />
 ```
 
+### Styling
+
+**Note:** this component is minimally styled by design. You can target the component using the `[data-svelte-typeahead]` selector.
+
+```css
+:global([data-svelte-typeahead]) {
+  margin: 1rem;
+}
+```
+
 ## API
 
 ### Props
 
-| Prop name             | Value                                                                      | Description                                                                                                                           |
-| :-------------------- | :------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
-| value                 | `string` (default: `""`)                                                   | Input search value                                                                                                                    |
-| data                  | `TItem[]` (default: `[]`)                                                  | Items to search                                                                                                                       |
-| extract               | `(TItem) => any`                                                           | Target an item key if `data` is an object array                                                                                       |
-| disable               | `(TItem) => boolean`                                                       | Pass in a function to disable items. They can be displayed in the results but will not be selectable.                                 |
-| filter                | `(TItem) => boolean`                                                       | Pass in a function to filter items. They will be hidden and are not displayed in the results.                                         |
-| autoselect            | `boolean` (default: `true`)                                                | Automatically select the first (top) result                                                                                           |
-| inputAfterSelect      | `"update" or "clear" or "keep"`(default: `"update"`)                       | Set to `"clear"` to clear the `value` after selecting a result. Set to `"keep"` to keep the search field unchanged after a selection. |
-| results               | `FuzzyResult[]` (default: `[]`)                                            | Raw fuzzy results from the [fuzzy](https://github.com/mattyork/fuzzy) module                                                          |
-| focusAfterSelect      | `boolean` (default: `false`)                                               | Set to `true` to re-focus the input after selecting a result.                                                                         |
-| showDropdownOnFocus   | `boolean` (default: `false`)                                               | Set to `true` to only show results when the input is focused.                                                                         |
-| showAllResultsOnFocus | `boolean` (default: `false`)                                               | Set to `true` for all results to be shown when an empty input is focused.                                                             |
-| limit                 | `number` (default: `Infinity`)                                             | Specify the maximum number of results to display.                                                                                     |
-| `...$$restProps`      | (forwarded to [`svelte-search`](https://github.com/metonym/svelte-search)) | All other props are forwarded to the input element.                                                                                   |
+| Name                  | Type                                                                       | Default value     | Description                                                                                                                           |
+| :-------------------- | :------------------------------------------------------------------------- | :---------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
+| value                 | `string`                                                                   | `""`              | Input search value.                                                                                                                   |
+| data                  | `TItem[]`                                                                  | `[]`              | Items to search.                                                                                                                      |
+| extract               | `(TItem) => any`                                                           | `(item) => item`  | Target the value if `TItem` is an object.                                                                                             |
+| disable               | `(TItem) => boolean`                                                       | `(item) => false` | Disabled items are shown in results but are not selectable.                                                                           |
+| filter                | `(TItem) => boolean`                                                       | `(item) => false` | Filtered out items will not be displayed in the results.                                                                              |
+| autoselect            | `boolean`                                                                  | `true`            | Whether to automatically select the first result.                                                                                     |
+| inputAfterSelect      | `"update" \| "clear" \| "keep"`                                            | `"update"`        | Set to `"clear"` to clear the `value` after selecting a result. Set to `"keep"` to keep the search field unchanged after a selection. |
+| results               | `FuzzyResult[]`                                                            | `[]`              | Raw fuzzy results from the [fuzzy](https://github.com/mattyork/fuzzy) module                                                          |
+| focusAfterSelect      | `boolean`                                                                  | `false`           | Set to `true` to re-focus the input after selecting a result.                                                                         |
+| showDropdownOnFocus   | `boolean`                                                                  | `false`           | Set to `true` to only show results when the input is focused.                                                                         |
+| showAllResultsOnFocus | `boolean`                                                                  | `false`           | Set to `true` for all results to be shown when an empty input is focused.                                                             |
+| limit                 | `number`                                                                   | `Infinity`        | Specify the maximum number of results to display.                                                                                     |
+| `...$$restProps`      | (forwarded to [`svelte-search`](https://github.com/metonym/svelte-search)) | N/A               | All other props are forwarded to the input element.                                                                                   |
 
 ### Dispatched events
 
