@@ -175,6 +175,7 @@
   }}
 />
 
+<!-- svelte-ignore a11y-role-has-required-aria-props -->
 <div
   data-svelte-typeahead
   bind:this={comboboxRef}
@@ -246,6 +247,7 @@
   >
     {#if showResults}
       {#each results as result, index}
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <li
           role="option"
           id="{id}-result-{index}"
