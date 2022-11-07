@@ -29,23 +29,6 @@ pnpm i -D svelte-typeahead
 
 ## Usage
 
-### SvelteKit set-up
-
-To use this component with [SvelteKit](https://github.com/sveltejs/kit) or vite-powered set-ups, instruct `vite` to optimize the `"fuzzy"` dependency.
-
-```js
-// svelte.config.js
-const config = {
-  kit: {
-    vite: {
-      optimizeDeps: {
-        include: ["fuzzy"],
-      },
-    },
-  },
-};
-```
-
 ### Styling
 
 **Note:** this component is minimally styled by design. You can target the component using the `[data-svelte-typeahead]` selector.
