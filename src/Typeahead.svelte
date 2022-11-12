@@ -175,13 +175,12 @@
   }}
 />
 
-<!-- svelte-ignore a11y-role-has-required-aria-props -->
 <div
   data-svelte-typeahead
   bind:this={comboboxRef}
   role="combobox"
   aria-haspopup="listbox"
-  aria-owns="{id}-listbox"
+  aria-controls="{id}-listbox"
   class:dropdown={results.length > 0}
   aria-expanded={showResults}
   id="{id}-typeahead"
