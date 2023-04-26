@@ -74,8 +74,9 @@
     const result = results[selectedIndex];
 
     if (result?.disabled) return;
-
-    const selectedValue = result ? extract(result.original) : null;
+    
+    const original = result ? result.original : null;
+    const selectedValue = original ? extract(original) : null;
     const searchedValue = value;
 
     if (inputAfterSelect == "clear") value = "";
@@ -85,9 +86,10 @@
       selectedIndex,
       searched: searchedValue,
       selected: selectedValue,
-      original: result?.original,
-      originalIndex: result.index,
+      original: original,
+      originalIndex: result?.index ?? null,
     });
+    selectedIndex = -1;
 
     await tick();
 
@@ -215,7 +217,7 @@
     on:blur
     on:keydown
     on:keydown={(e) => {
-      if (results.length === 0) return;
+      if (results.length === 0 && e.key !== 'Enter') return;
 
       switch (e.key) {
         case "Enter":
