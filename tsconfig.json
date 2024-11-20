@@ -9,6 +9,7 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "strict": true,
+    "types": ["svelte"],
     "paths": {
       "svelte-typeahead": ["./src"],
       "svelte-typeahead/*": ["./src/*"]
