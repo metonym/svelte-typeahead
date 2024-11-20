@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/metonym/svelte-typeahead.git"
+    "url": "git+https://github.com/metonym/svelte-typeahead.git"
   },
   "homepage": "https://github.com/metonym/svelte-typeahead",
   "bugs": "https://github.com/metonym/svelte-typeahead/issues",
