@@ -1,6 +1,5 @@
-/// <reference types="svelte" />
-import { SvelteComponentTyped } from "svelte";
-import { SearchProps } from "svelte-search/src/Search.svelte";
+import type { SvelteComponentTyped } from "svelte";
+import type { SearchProps } from "svelte-search/src/Search.svelte";
 
 export interface TypeaheadProps<TItem> extends Omit<SearchProps, "results"> {
   /**
