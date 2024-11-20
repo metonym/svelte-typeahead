@@ -10,7 +10,6 @@
   "types": "./src/index.d.ts",
   "scripts": {
     "dev": "rollup -cw",
-    "prepack": "BUNDLE=true rollup -c",
     "test": "svelte-check --workspace tests"
   },
   "dependencies": {
@@ -42,7 +41,6 @@
     "accessibility"
   ],
   "files": [
-    "lib",
     "src"
   ]
 }
