@@ -1,1 +1,1 @@
-export { default as default } from "./Typeahead.svelte";
+export { default } from "./Typeahead.svelte";
