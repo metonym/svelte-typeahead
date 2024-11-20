@@ -219,12 +219,6 @@ The following events are forwarded to the [svelte-search](https://github.com/met
 - on:blur
 - on:keydown
 
-## TypeScript
-
-Svelte version 3.31 or greater is required to use this component with TypeScript.
-
-TypeScript definitions are located in the [types folder](./types).
-
 ## Changelog
 
 [Changelog](CHANGELOG.md)
