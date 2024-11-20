@@ -17,14 +17,17 @@ Try it in the [Svelte REPL](https://svelte.dev/repl/a1b828d80de24f7e995b2365782c
 ## Installation
 
 ```bash
-# Yarn
-yarn add -D svelte-typeahead
-
 # npm
-npm i -D svelte-typeahead
+npm i svelte-typeahead
 
 # pnpm
-pnpm i -D svelte-typeahead
+pnpm i svelte-typeahead
+
+# Yarn
+yarn add svelte-typeahead
+
+# Bun
+bun add svelte-typeahead
 ```
 
 ## Usage
