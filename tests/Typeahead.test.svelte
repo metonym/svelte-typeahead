@@ -1,11 +1,13 @@
 <script lang="ts">
-  import Typeahead from "../types";
-  import type { TypeaheadProps } from "../types/Typeahead.svelte";
-  import T from "../types/Typeahead.svelte";
+  import Typeahead from "svelte-typeahead";
+  import type { TypeaheadProps } from "svelte-typeahead/Typeahead.svelte";
+  import T from "svelte-typeahead";
 
-  let results: TypeaheadProps<typeof data[0]>["results"] = [];
+  type Item = (typeof data)[number];
 
-  $: console.log(results[0]?.disabled);
+  let results: TypeaheadProps<Item>["results"] = [];
+
+  $: console.log(results?.[0]?.disabled);
 
   const data = [
     { id: 0, state: "California" },
@@ -19,13 +21,16 @@
     { id: 8, state: "New Hampshire" },
     { id: 9, state: "New Jersey" },
   ];
+
+  const extract = (item: Item) => item.state;
+  const disable = (item: Item) => item.state.length > 10;
+  const filter = (item: Item) => item.id < 4;
 </script>
 
-<!-- svelte-ignore missing-declaration -->
 <Typeahead
-  extract={(item) => item.state}
-  disable={(item) => item.state.length > 10}
-  filter={(item) => item.id < 4}
+  {extract}
+  {disable}
+  {filter}
   limit={1}
   autocapitalize={false + ""}
   placeholder="#{4}"
@@ -58,5 +63,4 @@
   </svelte:fragment>
 </Typeahead>
 
-<!-- svelte-ignore missing-declaration -->
 <T debounce={300} />
