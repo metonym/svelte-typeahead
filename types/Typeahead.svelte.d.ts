@@ -1,8 +1,8 @@
 /// <reference types="svelte" />
 import { SvelteComponentTyped } from "svelte";
-import { SearchProps } from "svelte-search/types/Search";
+import { SearchProps } from "svelte-search/src/Search.svelte";
 
-export interface TypeaheadProps<TItem> extends SearchProps {
+export interface TypeaheadProps<TItem> extends Omit<SearchProps, "results"> {
   /**
    * @default "typeahead-" + Math.random().toString(36)
    */
