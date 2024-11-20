@@ -7,7 +7,7 @@
   "type": "module",
   "svelte": "./src/index.js",
   "main": "./src/index.js",
-  "types": "./index.d.ts",
+  "types": "./src/index.d.ts",
   "exports": {
     "./*.svelte": {
       "types": "./src/*.svelte.d.ts",
@@ -25,6 +25,7 @@
   },
   "scripts": {
     "dev": "rollup -cw",
+    "build:prune-package": "bun scripts/prune-package.ts",
     "test": "svelte-check --workspace tests"
   },
   "dependencies": {
@@ -33,6 +34,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.2",
+    "@types/bun": "^1.1.13",
     "svelte": "^3.59.1",
     "svelte-check": "^3.6.2",
     "svelte-readme": "^3.6.3",
