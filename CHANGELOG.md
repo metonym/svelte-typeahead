@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.0](https://github.com/metonym/svelte-typeahead/releases/tag/v5.0.0) - 2025-01-20
+
+**Breaking Changes**
+
+- set `package.json#type` to `module` with `exports` field
+- drop bundled ESM/UMD builds (only Svelte source code is distributed)
+- colocate TypeScript definitions with Svelte source code
+
+**Fixes**
+
+- patch `svelte-search` to v2.1.1
+- run `npm pkg fix` to fix `package.json` metadata
+
 ## [4.4.2](https://github.com/metonym/svelte-typeahead/releases/tag/v4.4.2) - 2024-11-20
 
 - fix `$$restProps` type errors by upgrading `svelte-search`
