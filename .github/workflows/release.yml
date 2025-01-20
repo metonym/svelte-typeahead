@@ -18,7 +18,7 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Prune package.json
-        run: bun run build:prune-package
+        run: bunx culls --preserve=svelte
 
       - name: Publish package
         env:
