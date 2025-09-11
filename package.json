@@ -35,7 +35,7 @@
     "@rollup/plugin-commonjs": "^21.1.0",
     "@types/bun": "^1.1.17",
     "culls": "^0.1.1",
-    "svelte": "^4.2.19",
+    "svelte": "^3.59.1",
     "svelte-check": "^4.1.4",
     "svelte-readme": "^3.6.3",
     "typescript": "^5.7.3"
