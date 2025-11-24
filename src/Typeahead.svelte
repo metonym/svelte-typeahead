@@ -136,7 +136,16 @@
     selectedIndex = index;
   }
 
-  const open = () => (hideDropdown = false);
+  const open = () => {
+    hideDropdown = false;
+    // Reset selected index when reopening menu
+    if (autoselect && results.length > 0) {
+      selectedIndex = getNextNonDisabledIndex();
+    } else {
+      selectedIndex = -1;
+    }
+  };
+  
   const close = () => {
     hideDropdown = true;
     isFocused = false;
