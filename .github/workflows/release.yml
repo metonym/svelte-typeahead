@@ -11,14 +11,13 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v6
-      - uses: oven-sh/setup-bun@v2
       - uses: actions/setup-node@v6
         with:
           node-version: 22
           registry-url: "https://registry.npmjs.org"
 
       - name: Prune package.json
-        run: bunx culls --preserve=svelte
+        run: npx culls --preserve=svelte
 
       - name: Publish package
         env:
