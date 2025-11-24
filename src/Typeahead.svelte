@@ -212,7 +212,15 @@
     }}
     on:clear
     on:clear={open}
-    on:blur
+    on:blur={(e) => {
+      // Check if focus is moving to an element within the combobox
+      const relatedTarget = e.relatedTarget;
+      if (relatedTarget && comboboxRef?.contains(relatedTarget)) {
+        return;
+      }
+      // Close immediately for keyboard navigation (Tab, Shift+Tab)
+      close();
+    }}
     on:keydown
     on:keydown={(e) => {
       if (results.length === 0) return;
@@ -253,8 +261,9 @@
           class:selected={selectedIndex === index}
           class:disabled={result.disabled}
           aria-selected={selectedIndex === index}
-          on:click={() => {
+          on:mousedown={(e) => {
             if (result.disabled) return;
+            e.preventDefault(); // Prevent input from losing focus
             selectedIndex = index;
             select();
           }}
