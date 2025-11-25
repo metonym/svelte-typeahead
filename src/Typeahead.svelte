@@ -33,7 +33,10 @@
   /** Set to `true` to re-focus the input after selecting a result */
   export let focusAfterSelect = false;
 
-  /** Set to `true` to only show results when the input is focused */
+  /**
+   * Set to `true` to only show results when the input is focused
+   * @deprecated Focus is now always required to show results. This prop has no effect and will be removed in a future version.
+   */
   export let showDropdownOnFocus = false;
 
   /** Set to `true` for all results to be shown when an empty input is focused */
@@ -150,10 +153,7 @@
     .filter((result) => !filter(result.original))
     .map((result) => ({ ...result, disabled: disable(result.original) }));
   $: resultsId = results.map((result) => extract(result.original)).join("");
-  $: showResults = !hideDropdown && results.length > 0;
-  $: if (showDropdownOnFocus) {
-    showResults = showResults && isFocused;
-  }
+  $: showResults = !hideDropdown && results.length > 0 && isFocused;
   $: if (isFocused && showAllResultsOnFocus && value.length === 0) {
     results = data
       .filter((datum) => !filter(datum))
@@ -205,9 +205,9 @@
     on:focus
     on:focus={() => {
       open();
+      isFocused = true;
       if (showDropdownOnFocus || showAllResultsOnFocus) {
         showResults = true;
-        isFocused = true;
       }
     }}
     on:clear
