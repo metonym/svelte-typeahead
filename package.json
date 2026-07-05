@@ -24,7 +24,9 @@
     }
   },
   "scripts": {
-    "dev": "rollup -cw",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "test": "svelte-check --workspace tests"
   },
   "dependencies": {
@@ -32,13 +34,14 @@
     "svelte-search": "^2.1.2"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^21.1.0",
+    "@sveltejs/vite-plugin-svelte": "^7.1.2",
     "@types/bun": "^1.3.3",
     "culls": "^0.1.2",
-    "svelte": "^3.59.1",
+    "svelte": "^5.56.4",
     "svelte-check": "^4.1.4",
-    "svelte-readme": "^3.6.3",
-    "typescript": "^5.9.3"
+    "svelte-readme": "^4.5.2",
+    "typescript": "^5.9.3",
+    "vite": "^8.1.3"
   },
   "repository": {
     "type": "git",
