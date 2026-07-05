@@ -292,11 +292,12 @@
     background-color: #fff;
   }
 
-  ul {
+  [data-svelte-typeahead] ul {
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
+    max-width: none;
     margin: 0;
     padding: 0;
     list-style: none;
