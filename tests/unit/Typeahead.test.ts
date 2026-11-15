@@ -72,6 +72,23 @@ describe("Typeahead", () => {
     expect(options[2].textContent?.trim()).toBe("date");
   });
 
+  test("keyboard navigation leaves no selection when all results are disabled", () => {
+    const { target, input } = setup({ disable: () => true });
+    typeInto(input, "a");
+    expect(optionText(target)).toEqual(["apple", "banana", "date", "grape"]);
+    expect(input.hasAttribute("aria-activedescendant")).toBe(false);
+
+    pressKey(input, "ArrowDown");
+    pressKey(input, "ArrowUp");
+    pressKey(input, "Enter");
+
+    expect(target.querySelectorAll("li.selected")).toHaveLength(0);
+    expect(input.hasAttribute("aria-activedescendant")).toBe(false);
+    expect(target.querySelector('[data-testid="select-detail"]')?.textContent).toBe(
+      "null",
+    );
+  });
+
   test("ArrowDown/ArrowUp move the selection and wrap around", () => {
     const { target, input } = setup();
     typeInto(input, "a");
