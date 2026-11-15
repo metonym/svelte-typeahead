@@ -213,6 +213,34 @@ describe("Typeahead", () => {
     expect(input.hasAttribute("aria-activedescendant")).toBe(false);
   });
 
+  test("reopening the dropdown resets the highlight to the first result", () => {
+    const { target, input } = setup();
+    flushSync(() => input.focus());
+    typeInto(input, "a");
+    pressKey(input, "ArrowDown");
+    pressKey(input, "ArrowDown");
+    expect(target.querySelector("li.selected")?.textContent?.trim()).toBe("date");
+
+    flushSync(() => input.blur());
+    flushSync(() => input.focus());
+
+    expect(target.querySelector("li.selected")?.textContent?.trim()).toBe("apple");
+  });
+
+  test("reopening the dropdown with autoselect=false clears the highlight", () => {
+    const { target, input } = setup({ autoselect: false });
+    flushSync(() => input.focus());
+    typeInto(input, "a");
+    pressKey(input, "ArrowDown");
+    expect(target.querySelectorAll("li.selected")).toHaveLength(1);
+
+    flushSync(() => input.blur());
+    flushSync(() => input.focus());
+
+    expect(target.querySelectorAll("li")).toHaveLength(4);
+    expect(target.querySelectorAll("li.selected")).toHaveLength(0);
+  });
+
   test("aria-expanded toggles with the dropdown's visibility", () => {
     const { target, input } = setup();
     const combobox = target.querySelector("[data-svelte-typeahead]");
