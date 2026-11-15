@@ -32,7 +32,7 @@
   {disable}
   {filter}
   limit={1}
-  autocapitalize={false + ""}
+  autocapitalize={false ? "on" : "off"}
   placeholder="#{4}"
   autofocus
   hideLabel

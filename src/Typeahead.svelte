@@ -76,7 +76,7 @@
   async function select() {
     const result = results[selectedIndex];
 
-    if (result.disabled) return;
+    if (!result || result.disabled) return;
 
     const selectedValue = extract(result.original);
     const searchedValue = value;
@@ -100,46 +100,35 @@
 
   /** @type {() => number} */
   function getNextNonDisabledIndex() {
-    let index = 0;
-    let disabled = results[index]?.disabled ?? false;
-
-    while (disabled) {
-      if (index === results.length) {
-        index = 0;
-      } else {
-        index += 1;
-      }
-
-      disabled = results[index]?.disabled ?? false;
-    }
-
-    return index;
+    return results.findIndex((result) => !result.disabled);
   }
 
   /** @type {(direction: -1 | 1) => void} */
   function change(direction) {
-    let index =
-      direction === 1 && selectedIndex === results.length - 1
-        ? 0
-        : selectedIndex + direction;
-    if (index < 0) index = results.length - 1;
+    const startingIndex = selectedIndex === -1 && direction === -1 ? 0 : selectedIndex;
 
-    let disabled = results[index].disabled;
+    for (let step = 1; step <= results.length; step += 1) {
+      const index = (startingIndex + step * direction + results.length) % results.length;
 
-    while (disabled) {
-      if (index === results.length) {
-        index = 0;
-      } else {
-        index += direction;
+      if (!results[index].disabled) {
+        selectedIndex = index;
+        return;
       }
-
-      disabled = results[index].disabled;
     }
 
-    selectedIndex = index;
+    selectedIndex = -1;
   }
 
-  const open = () => (hideDropdown = false);
+  const open = () => {
+    hideDropdown = false;
+    // Reset selected index when reopening menu
+    if (autoselect && results.length > 0) {
+      selectedIndex = getNextNonDisabledIndex();
+    } else {
+      selectedIndex = -1;
+    }
+  };
+  
   const close = () => {
     hideDropdown = true;
     isFocused = false;
@@ -292,11 +281,12 @@
     background-color: #fff;
   }
 
-  ul {
+  [data-svelte-typeahead] ul {
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
+    max-width: none;
     margin: 0;
     padding: 0;
     list-style: none;
