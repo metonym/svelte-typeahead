@@ -29,6 +29,10 @@ function optionText(target: ParentNode) {
   );
 }
 
+function selectedText(target: ParentNode) {
+  return target.querySelector("li.selected")?.textContent?.trim();
+}
+
 describe("Typeahead", () => {
   test("fuzzy-filters data against the extracted value", () => {
     const { target, input } = setup();
@@ -87,6 +91,50 @@ describe("Typeahead", () => {
     expect(target.querySelector('[data-testid="select-detail"]')?.textContent).toBe(
       "null",
     );
+  });
+
+  test("ArrowDown wraps past a disabled last result", () => {
+    const { target, input } = setup({ disable: (item: string) => item === "grape" });
+    typeInto(input, "a");
+    expect(optionText(target)).toEqual(["apple", "banana", "date", "grape"]);
+
+    pressKey(input, "ArrowDown");
+    pressKey(input, "ArrowDown");
+    expect(selectedText(target)).toBe("date");
+
+    pressKey(input, "ArrowDown");
+    expect(selectedText(target)).toBe("apple");
+  });
+
+  test("ArrowUp wraps past a disabled first result", () => {
+    const { target, input } = setup({ disable: (item: string) => item === "apple" });
+    typeInto(input, "a");
+    expect(optionText(target)).toEqual(["apple", "banana", "date", "grape"]);
+    // Autoselect skips the disabled "apple".
+    expect(selectedText(target)).toBe("banana");
+
+    pressKey(input, "ArrowUp");
+    expect(selectedText(target)).toBe("grape");
+  });
+
+  test("Enter with autoselect=false and no highlighted result does nothing", () => {
+    const { target, input } = setup({ autoselect: false });
+    typeInto(input, "a");
+
+    pressKey(input, "Enter");
+
+    expect(input.value).toBe("a");
+    expect(target.querySelector('[data-testid="select-detail"]')?.textContent).toBe(
+      "null",
+    );
+  });
+
+  test("ArrowUp with autoselect=false highlights the last result", () => {
+    const { target, input } = setup({ autoselect: false });
+    typeInto(input, "a");
+
+    pressKey(input, "ArrowUp");
+    expect(selectedText(target)).toBe("grape");
   });
 
   test("ArrowDown/ArrowUp move the selection and wrap around", () => {
