@@ -4,7 +4,8 @@ on:
     branches: [master]
 
 jobs:
-  test:
+  checks:
+    name: Type Check & Unit Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -13,5 +14,11 @@ jobs:
       - name: Install dependencies
         run: bun ci
 
+      - name: Check types
+        run: bun run test:types
+
       - name: Run unit tests
-        run: bun run test
+        run: bun run test:unit
+
+      - name: Build documentation
+        run: bun run build

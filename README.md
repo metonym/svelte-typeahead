@@ -97,8 +97,8 @@ Use the default slot to render custom results.
 Use the "no-results" slot to render a message if the search value does not yield results.
 
 ```svelte
-<Typeahead value="abcd" {data} {extract} let:value>
-  <svelte:fragment slot="no-results">
+<Typeahead value="abcd" {data} {extract}>
+  <svelte:fragment slot="no-results" let:value>
     No results found for "{value}"
   </svelte:fragment>
 </Typeahead>

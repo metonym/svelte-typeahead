@@ -13,7 +13,7 @@ jobs:
         run: bun ci
 
       - name: Build app
-        run: bun run rollup -c
+        run: bun run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
