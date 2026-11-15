@@ -53,7 +53,9 @@
 
   let comboboxRef = null;
   let searchRef = null;
-  let hideDropdown = false;
+  // Hidden until the user focuses or types, so programmatic `value` changes
+  // don't open the dropdown on their own.
+  let hideDropdown = true;
   let selectedIndex = -1;
   let prevResults = "";
   let isFocused = false;
@@ -61,10 +63,6 @@
   afterUpdate(() => {
     if (prevResults !== resultsId && autoselect) {
       selectedIndex = getNextNonDisabledIndex();
-    }
-
-    if (prevResults !== resultsId && !$$slots["no-results"]) {
-      hideDropdown = results.length === 0;
     }
 
     prevResults = resultsId;
@@ -117,19 +115,16 @@
   }
 
   const open = () => {
-    hideDropdown = false;
-    // Reset selected index when reopening menu
-    if (autoselect && results.length > 0) {
-      selectedIndex = getNextNonDisabledIndex();
-    } else {
-      selectedIndex = -1;
+    // Only reset the highlight when reopening, so typing into an already-open
+    // dropdown keeps the current highlight.
+    if (hideDropdown) {
+      selectedIndex = autoselect ? getNextNonDisabledIndex() : -1;
     }
+
+    hideDropdown = false;
   };
-  
-  const close = () => {
-    hideDropdown = true;
-    isFocused = false;
-  };
+
+  const close = () => (hideDropdown = true);
 
   $: options = { pre: "<mark>", post: "</mark>", extract };
   $: results = fuzzy
@@ -160,6 +155,7 @@
   on:click={({ target }) => {
     if (!hideDropdown && !comboboxRef?.contains(target)) {
       close();
+      isFocused = false;
     }
   }}
 />
@@ -190,17 +186,17 @@
     bind:value
     on:type
     on:input
+    on:input={open}
     on:change
     on:focus
     on:focus={() => {
       open();
+      isFocused = true;
       if (showDropdownOnFocus || showAllResultsOnFocus) {
         showResults = true;
-        isFocused = true;
       }
     }}
     on:clear
-    on:clear={open}
     on:blur={(e) => {
       // Check if focus is moving to an element within the combobox
       const relatedTarget = e.relatedTarget;
@@ -209,6 +205,7 @@
       }
       // Close immediately for keyboard navigation (Tab, Shift+Tab)
       close();
+      isFocused = false;
     }}
     on:keydown
     on:keydown={(e) => {
