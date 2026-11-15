@@ -1,6 +1,6 @@
 {
   "name": "svelte-typeahead",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "license": "MIT",
   "description": "Accessible, fuzzy search typeahead component",
   "author": "Eric Liu (https://github.com/metonym)",

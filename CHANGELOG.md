@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.3](https://github.com/metonym/svelte-typeahead/releases/tag/v5.0.3) - 2026-11-15
+
+**Fixes**
+
+- handle keyboard navigation when all results are disabled
+- reset highlighted index when reopening the dropdown
+
 ## [5.0.2](https://github.com/metonym/svelte-typeahead/releases/tag/v5.0.2) - 2025-11-24
 
 **Fixes**
